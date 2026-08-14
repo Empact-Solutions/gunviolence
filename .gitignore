@@ -49,3 +49,8 @@ po/*~
 rsconnect/
 
 .DS_Store
+site/data/cjobrien_1.pdf
+/.claude
+/input
+/scripts
+/Skill Templates

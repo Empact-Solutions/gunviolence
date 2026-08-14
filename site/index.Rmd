@@ -1,0 +1,83 @@
+---
+title: "Youth Gun Violence Isn't \"Out of Control\" — A Data-Driven Look"
+output:
+  html_document:
+    theme: null
+    highlight: null
+    mathjax: null
+    self_contained: false
+    includes:
+      in_header: _head_index.html
+      after_body: _scripts_index.html
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+source("../scripts/site_layout.R")
+
+# Cache-bust our own CSS on every render, so edits always show up on reload —
+# without this, browsers (and any caching proxy in between) can keep serving
+# a stale copy of these files indefinitely at their bare URL.
+v <- format(Sys.time(), "%Y%m%d%H%M%OS3", tz = "UTC")
+v <- gsub("[^0-9]", "", v)
+
+writeLines(sprintf(
+  '<meta name="description" content="Why the data does not support the narrative that youth gun violence is out of control." />\n<link rel="stylesheet" href="css/style.css?v=%s" />',
+  v
+), "_head_index.html")
+
+# No chart JS needed on the home page.
+writeLines("", "_scripts_index.html")
+```
+
+```{r nav, results='asis', echo=FALSE}
+cat(nav_html("home"))
+```
+
+<header class="site-header">
+<div class="wrap">
+<p class="kicker">Data brief</p>
+<h1>Youth Gun Violence Isn't "Out of Control." Here's What the Data Actually Show.</h1>
+<p class="byline"></p>
+</div>
+</header>
+
+<main class="wrap article">
+
+## Narratives of youth violence don’t have to be data-free
+
+Americans’ perceptions of crime and violence are driven more by anecdotes than data. According to [Gallup polling](https://news.gallup.com/poll/652763/smaller-majorities-say-crime-serious-increasing.aspx), the majority of us believe that crime has been getting worse and worse year-over-year since the late 1980s, despite the fact that crime rates have [plummeted](https://www.pewresearch.org/short-reads/2024/04/24/what-the-data-says-about-crime-in-the-us/) and some measures of violent crime have reached [record lows](https://www.npr.org/2026/06/30/nx-s1-5866810/us-murder-rate-record-low-crime-homicide). Anecdotal pieces of evidence - often produced by media outlets and amplified by social media algorithms - are driving the narrative about crime, safety, and youth violence.
+
+Youth justice takes being “data-driven” as a primary tenet, but, as a field, we tend to apply data more in contexts of case processing or system improvement than in understanding how broader societal trends shape our work. When it comes to understanding how our work is shaped by the broader contours of youth violence, we tend to default to the  anecdotally-derived, data-free narratives that are in the ether. Often, these are some version of “youth violence is out of control.”
+
+These data-free narratives have substantial impacts on our work and on the outcomes of youth in the justice system. If youth violence is out of control, more restrictive responses may be warranted. If today’s youth are entering the system with more serious offenses, that explains why youth are staying in detention longer. Data-free narratives almost always justify more punitive and more restrictive practices and, because there is no data behind them, they can be extremely difficult to push back against.
+
+As a field, we can no longer afford to be passive in the face of data-free narratives and we no longer have to be. New sources of data enable us to build data-driven understandings of youth violence. We can see local, regional, and national trends in violence, and identify whether youth are primarily impacted as perpetrators or as victims.
+
+The remainder of this site examines data about youth violence shared with us from the Gun Violence Archive by The Trace. You can explore the data in greater detail at [The Trace](https://projects.thetrace.org/gun-violence-map/). As you read and explore this data, we encourage you to think about how you might use it to inform or guide your work.
+
+<section class="link-cards">
+<a class="card" href="takeaways.html">
+<h3>Key Takeaways</h3>
+<p>What the Gun Violence Archive data actually shows: youth are affected far more as victims than as perpetrators, and youth are a small share of all gun violence overall.</p>
+<span class="card-cta">See the data →</span>
+</a>
+<a class="card" href="dashboard.html">
+<h3>Explore the Dashboard</h3>
+<p>Dig into any state, any age group, counts or rates — build your own view of the trends.</p>
+<span class="card-cta">Open the dashboard →</span>
+</a>
+<a class="card" href="about.html">
+<h3>About the Gun Violence Archive</h3>
+<p>Where this data comes from, how it's collected, and how we defined victims, perpetrators, and rates.</p>
+<span class="card-cta">Read the methodology →</span>
+</a>
+</section>
+
+</main>
+
+<footer class="site-footer">
+<div class="wrap">
+<p>Data: [Gun Violence Archive](https://www.gunviolencearchive.org/){target="_blank" rel="noopener"}. Population estimates: CDC SEER.</p>
+</div>
+</footer>

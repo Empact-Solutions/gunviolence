@@ -1,0 +1,141 @@
+---
+title: "State-Level Dashboard — Youth Gun Violence"
+output:
+  html_document:
+    theme: null
+    highlight: null
+    mathjax: null
+    self_contained: false
+    includes:
+      in_header: _head_dashboard.html
+      after_body: _scripts_dashboard.html
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+source("../scripts/site_layout.R")
+
+v <- format(Sys.time(), "%Y%m%d%H%M%OS3", tz = "UTC")
+v <- gsub("[^0-9]", "", v)
+
+writeLines(sprintf(
+  '<meta name="description" content="Explore Gun Violence Archive youth and child gun violence data by state, age group, and rate." />\n<link rel="stylesheet" href="css/style.css?v=%s" />',
+  v
+), "_head_dashboard.html")
+
+# dashboard.js is the only script that calls d3.* directly (via sequentialRamp
+# in utils.js and the choropleth code) and needs topojson to draw the map.
+writeLines(sprintf('<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6.16/dist/plot.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script src="js/utils.js?v=%1$s"></script>
+<script src="js/dashboard.js?v=%1$s"></script>', v), "_scripts_dashboard.html")
+```
+
+```{r nav, results='asis', echo=FALSE}
+cat(nav_html("dashboard"))
+```
+
+<header class="site-header page-header">
+<div class="wrap">
+<h1>State-Level Dashboard</h1>
+</div>
+</header>
+
+<section class="dashboard-section">
+<div class="wrap">
+<p class="dashboard-note">Dig into any state, switch between counts and rates, and choose whether to view raw monthly data or a 12-month rolling average — for victims, perpetrators, or both, broken out by children, youth, or both combined. All figures come from Gun Violence Archive incident records. Rates are per 100,000 residents in the relevant age group, using CDC SEER population estimates. Rolling averages, where selected, are calculated as a trailing 12-month mean.</p>
+
+<div class="dashboard-controls">
+<div class="control">
+<label for="ctl-state">State</label>
+<select id="ctl-state"></select>
+</div>
+<div class="control">
+<label for="ctl-population">Age range</label>
+<select id="ctl-population">
+<option value="youth">Youth (12–17)</option>
+<option value="child">Children (0–11)</option>
+<option value="">Children and youth (0–17)</option>
+</select>
+</div>
+<div class="control">
+<label for="ctl-status">Show</label>
+<select id="ctl-status">
+<option value="both">Victims and perpetrators</option>
+<option value="victim">Victims only</option>
+<option value="perp">Perpetrators only</option>
+</select>
+</div>
+<div class="control">
+<label for="ctl-possession">Offense filter</label>
+<select id="ctl-possession">
+<option value="all">All offenses</option>
+<option value="excl">Exclude possession-only</option>
+<option value="only">Possession-only only</option>
+</select>
+</div>
+<div class="control">
+<label for="ctl-metric-type-trend">View</label>
+<select id="ctl-metric-type-trend">
+<option value="rate">Rate per 100,000</option>
+<option value="count">Raw counts</option>
+</select>
+</div>
+<div class="control toggle-control">
+<label class="toggle">
+<input type="checkbox" id="ctl-smoothing" checked />
+<span>12-month rolling average</span>
+</label>
+</div>
+</div>
+
+<div class="dashboard-controls">
+<div class="control comparison-control">
+<label for="ctl-compare">Compare up to 3 more states</label>
+<select id="ctl-compare" multiple size="4"></select>
+<p class="hint">Cmd/Ctrl-click to select multiple. "United States" is listed first in both dropdowns if you want the national trend.</p>
+</div>
+<div class="control clear-control">
+<button type="button" id="ctl-compare-clear">Clear comparisons</button>
+</div>
+</div>
+
+<figure class="chart">
+<div id="dash-trend"></div>
+<figcaption>Selected state(s) and any comparisons. "United States" behaves like any other selection — pick it explicitly to see the national trend.</figcaption>
+</figure>
+
+<div class="dashboard-controls">
+<div class="control">
+<label for="ctl-map-metric">Map metric</label>
+<select id="ctl-map-metric">
+<option value="youth_victim">Youth (12–17) victimization</option>
+<option value="youth_perp_minus_possession">Youth (12–17) offenses (excl. possession)</option>
+<option value="child_victim">Children (0–11) victimization</option>
+<option value="child_perp_minus_possession">Children (0–11) offenses (excl. possession)</option>
+</select>
+</div>
+<div class="control">
+<label for="ctl-metric-type">View</label>
+<select id="ctl-metric-type">
+<option value="rate">Rate per 100,000</option>
+<option value="count">Raw counts</option>
+</select>
+</div>
+</div>
+
+<figure class="chart">
+<div id="dash-map"></div>
+<figcaption id="dash-map-caption"></figcaption>
+</figure>
+
+<p>Want the headline findings first? Read the <a href="takeaways.html">key takeaways</a>. Curious about the data itself? See <a href="about.html">about the Gun Violence Archive</a>.</p>
+</div>
+</section>
+
+<footer class="site-footer">
+<div class="wrap">
+<p>Data: [Gun Violence Archive](https://www.gunviolencearchive.org/){target="_blank" rel="noopener"}. Population estimates: CDC SEER.</p>
+</div>
+</footer>

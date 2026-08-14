@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>State-Level Dashboard — Youth Gun Violence</title>
+
+<script src="dashboard_files/header-attrs-2.30/header-attrs.js"></script>
+<meta name="description" content="Explore Gun Violence Archive youth and child gun violence data by state, age group, and rate." />
+<link rel="stylesheet" href="css/style.css?v=20260814203622438" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">State-Level Dashboard — Youth Gun
+Violence</h1>
+
+
+
+<nav class="site-nav">
+<a href="index.html">Home</a> <a href="takeaways.html">Key Takeaways</a>
+<a href="dashboard.html" class="active" aria-current="page">Dashboard</a>
+<a href="about.html">About the Gun Violence Archive</a>
+</nav>
+<header class="site-header page-header">
+<div class="wrap">
+<h1>
+State-Level Dashboard
+</h1>
+</div>
+</header>
+<section class="dashboard-section">
+<div class="wrap">
+<p class="dashboard-note">
+Dig into any state, switch between counts and rates, and choose whether
+to view raw monthly data or a 12-month rolling average — for victims,
+perpetrators, or both, broken out by children, youth, or both combined.
+All figures come from Gun Violence Archive incident records. Rates are
+per 100,000 residents in the relevant age group, using CDC SEER
+population estimates. Rolling averages, where selected, are calculated
+as a trailing 12-month mean.
+</p>
+<div class="dashboard-controls">
+<div class="control">
+<p><label for="ctl-state">State</label>
+<select id="ctl-state"></select></p>
+</div>
+<div class="control">
+<p><label for="ctl-population">Age range</label>
+<select id="ctl-population"> <option value="youth">Youth
+(12–17)</option> <option value="child">Children (0–11)</option>
+<option value="">Children and youth (0–17)</option> </select></p>
+</div>
+<div class="control">
+<p><label for="ctl-status">Show</label> <select id="ctl-status">
+<option value="both">Victims and perpetrators</option>
+<option value="victim">Victims only</option>
+<option value="perp">Perpetrators only</option> </select></p>
+</div>
+<div class="control">
+<p><label for="ctl-possession">Offense filter</label>
+<select id="ctl-possession"> <option value="all">All offenses</option>
+<option value="excl">Exclude possession-only</option>
+<option value="only">Possession-only only</option> </select></p>
+</div>
+<div class="control">
+<p><label for="ctl-metric-type-trend">View</label>
+<select id="ctl-metric-type-trend"> <option value="rate">Rate per
+100,000</option> <option value="count">Raw counts</option> </select></p>
+</div>
+<div class="control toggle-control">
+<p><label class="toggle">
+<input type="checkbox" id="ctl-smoothing" checked /> <span>12-month
+rolling average</span> </label></p>
+</div>
+</div>
+<div class="dashboard-controls">
+<div class="control comparison-control">
+<label for="ctl-compare">Compare up to 3 more states</label>
+<select id="ctl-compare" multiple size="4"></select>
+<p class="hint">
+Cmd/Ctrl-click to select multiple. “United States” is listed first in
+both dropdowns if you want the national trend.
+</p>
+</div>
+<div class="control clear-control">
+<button type="button" id="ctl-compare-clear">
+Clear comparisons
+</button>
+</div>
+</div>
+<figure class="chart">
+<div id="dash-trend">
+
+</div>
+<figcaption>
+Selected state(s) and any comparisons. “United States” behaves like any
+other selection — pick it explicitly to see the national trend.
+</figcaption>
+</figure>
+<div class="dashboard-controls">
+<div class="control">
+<p><label for="ctl-map-metric">Map metric</label>
+<select id="ctl-map-metric"> <option value="youth_victim">Youth (12–17)
+victimization</option> <option value="youth_perp_minus_possession">Youth
+(12–17) offenses (excl. possession)</option>
+<option value="child_victim">Children (0–11) victimization</option>
+<option value="child_perp_minus_possession">Children (0–11) offenses
+(excl. possession)</option> </select></p>
+</div>
+<div class="control">
+<p><label for="ctl-metric-type">View</label>
+<select id="ctl-metric-type"> <option value="rate">Rate per
+100,000</option> <option value="count">Raw counts</option> </select></p>
+</div>
+</div>
+<figure class="chart">
+<div id="dash-map">
+
+</div>
+<figcaption id="dash-map-caption">
+</figcaption>
+</figure>
+<p>
+Want the headline findings first? Read the <a href="takeaways.html">key
+takeaways</a>. Curious about the data itself? See
+<a href="about.html">about the Gun Violence Archive</a>.
+</p>
+</div>
+</section>
+<footer class="site-footer">
+<div class="wrap">
+<p>
+Data: <a href="https://www.gunviolencearchive.org/" target="_blank"
+rel="noopener">Gun Violence Archive</a>. Population estimates: CDC SEER.
+</p>
+</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6.16/dist/plot.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script src="js/utils.js?v=20260814203622438"></script>
+<script src="js/dashboard.js?v=20260814203622438"></script>
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>

@@ -1,0 +1,150 @@
+---
+title: "Key Takeaways from the Data — Youth Gun Violence"
+output:
+  html_document:
+    theme: null
+    highlight: null
+    mathjax: null
+    self_contained: false
+    includes:
+      in_header: _head_takeaways.html
+      after_body: _scripts_takeaways.html
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+source("../scripts/site_layout.R")
+
+v <- format(Sys.time(), "%Y%m%d%H%M%OS3", tz = "UTC")
+v <- gsub("[^0-9]", "", v)
+
+writeLines(sprintf(
+  '<meta name="description" content="Key takeaways from Gun Violence Archive data: youth are affected far more as victims than as perpetrators, and youth gun violence is a small share of the overall picture." />\n<link rel="stylesheet" href="css/style.css?v=%s" />',
+  v
+), "_head_takeaways.html")
+
+# Plot's UMD build depends on D3 being loaded globally (it is NOT
+# self-contained, despite appearances) — d3 must load before Plot. This page
+# never calls topojson-client directly, so that tag (dashboard-only) is omitted.
+writeLines(sprintf('<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6.16/dist/plot.umd.min.js"></script>
+<script src="js/utils.js?v=%1$s"></script>
+<script src="js/blog-charts.js?v=%1$s"></script>
+<script src="js/incidents-charts.js?v=%1$s"></script>', v), "_scripts_takeaways.html")
+```
+
+```{r nav, results='asis', echo=FALSE}
+cat(nav_html("takeaways"))
+```
+
+<header class="site-header page-header">
+<div class="wrap">
+<h1>Key Takeaways from the Data</h1>
+</div>
+</header>
+
+<main class="wrap article">
+
+## 1. Youth and children are more involved in gun violence as victims than as perpetrators
+
+The rate at which people under 18 experience gun violence as victims is persistently higher than the rate they are involved in gun violence as perpetrators. At the height of the recent spike in gun violence, youth and children were more than twice as likely to be victims of gun violence than perpetrators. The experience of children and youth as **victims** of gun violence is one of the most overlooked and enduring trends in the GVA data.
+
+<div class="chart-controls">
+<label class="toggle">
+<input type="checkbox" id="smoothing-toggle-u18" />
+<span>Show 12-month rolling average</span>
+</label>
+</div>
+
+#### Youth and child gun violence victims and perpetrators per year per 100,000 people under 18, by month, 2017 - 2026
+<figure class="chart">
+<div id="chart-victims-perps-u18"></div>
+<figcaption>Children and youth (ages 0–17) gun violence victims and perpetrators, annual rate per 100,000 people under 18. The perpetrator rate excludes possession-only offenses. Source: Gun Violence Archive; population denominators from CDC SEER.</figcaption>
+</figure>
+
+## 2. The pandemic-era spike in gun violence was real, but youth were primarily impacted as victims.
+
+Around the time of the pandemic, the youth gun victimization rate doubled, from about than 10 per 100k per year in February 2019 to more than 20 in June 2023 (measured by the rolling 12-month average). The rate at which youth were involved in gun violence as perpetrators also increased significantly during this time frame, but the magnitude was far smaller. Where youth victimization per 100,000 increased by 10 youth per year, perpetration rates increases by just 3 youth per 100,000 per year - nearly a 50% increase but a much smaller magnitude. According to the GVA data, the increase in youth **victimization** by firearms is the biggest story to tell about changing gun violence around the time of the pandemic. Notably, in the media and public imagination, this victimization story was misconstrued as a story about youth violence being out of control.
+
+
+<div class="chart-controls">
+<label class="toggle">
+<input type="checkbox" id="smoothing-toggle" />
+<span>Show 12-month rolling average</span>
+</label>
+</div>
+
+#### Youth gun violence victims and perpetrators per year per 100,000 youth, by month, 2017 - 2026
+<figure class="chart">
+<div id="chart-victims-perps"></div>
+<figcaption>Youth (ages 12–17) gun violence victims and perpetrators, annual rate per 100,000 youth. The perpetrator rate excludes possession-only offenses. Source: Gun Violence Archive; population denominators from CDC SEER.</figcaption>
+</figure>
+
+
+## 3. The pandemic-era surge is over
+
+The pandemic-era surge in victimization and perpetration is over. Youth and child involvement in gun violence has fallen substantially from its peak — for victims and perpetrators alike, in both age groups.
+
+<div class="stat-cards-intro">
+<p>Change from each group's pandemic-era peak (12-month average, 2020&ndash;2024) to the most recent 12-month average.</p>
+</div>
+
+<div class="stat-cards">
+<div class="stat-card is-victim">
+<p class="eyebrow">Children, ages 0&ndash;11 &middot; Victims</p>
+<p class="figure">41%</p>
+<p class="statement">decline in child gun violence victims</p>
+<p class="detail">Children injured or killed by gun violence have fallen 41% from the pandemic-era peak to the most recent 12-month average.</p>
+</div>
+<div class="stat-card is-perp">
+<p class="eyebrow">Children, ages 0&ndash;11 &middot; Perpetrators</p>
+<p class="figure">40%</p>
+<p class="statement">decline in child perpetrators of gun violence</p>
+<p class="detail">The number of children committing gun violence has fallen 40% from the pandemic-era peak, excluding possession-only offenses.</p>
+</div>
+<div class="stat-card is-victim">
+<p class="eyebrow">Youth, ages 12&ndash;17 &middot; Victims</p>
+<p class="figure">35%</p>
+<p class="statement">decline in youth gun violence victims</p>
+<p class="detail">Youth injured or killed by gun violence have fallen 35% from the pandemic-era peak to the most recent 12-month average.</p>
+</div>
+<div class="stat-card is-perp">
+<p class="eyebrow">Youth, ages 12&ndash;17 &middot; Perpetrators</p>
+<p class="figure">19%</p>
+<p class="statement">decline in youth perpetrators of gun violence</p>
+<p class="detail">The number of youth committing gun violence has fallen 19% from the pandemic-era peak, excluding possession-only offenses.</p>
+</div>
+</div>
+
+<p class="stat-cards-source">Source: percent change from each series' pandemic-era peak (12-month average, largest value between 2020 and 2024) to the most recent month. Perpetrator figures exclude possession-only offenses.</p>
+
+Whatever surge in youth gun violence the pandemic produced, it has substantially reversed — on both sides of the ledger, for both age groups.
+
+## 4. Youth violence is a small part of the picture compared to adults
+
+Of all the gun violence incidents recorded in the United States, the vast majority does not involve youth or children at all. **Across the full 2017–2026 period, about 85% of incidents involve only adults.** Gun violence is overwhelmingly an adult phenomenon.This chart shows the total number of incidents involving adults alone versus youth as victims or perpetrators. The number of adult-alone incidents increased 60% over its pre-pandemic level, where youth-involved incidents increased a relatively modest 34%.
+
+
+<figure class="chart">
+<div id="chart-incident-volume"></div>
+<figcaption>All incidents nationally, split by whether a child or youth (ages 0–17) was involved as a victim, as a perpetrator (excluding possession-only offenses), or not at all. 6-month rolling sum. Sources: Gun Violence Archive national incident totals; age-coded incident records.</figcaption>
+</figure>
+
+
+<figure class="chart">
+<div id="chart-incident-share"></div>
+<figcaption>Share of all national incidents that involved a child or youth victim, or a child or youth perpetrator (excluding possession-only offenses). 6-month rolling sum, victim/perpetrator incidents divided by total incidents.</figcaption>
+</figure>
+
+Youth gun violence is a real problem, and the pandemic-era rise in youth victimization was real. But it was never the driver of the broader crisis, and it was never primarily a story about youth as offenders. It was, and remains, a story about kids getting caught in the crossfire of a much larger, adult-driven surge in American gun violence — one that, on every measure we can track, is now in retreat.
+
+
+Want to see this broken down by state? Head to the [dashboard](dashboard.html). Curious where this data comes from? Read [about the Gun Violence Archive](about.html).
+
+</main>
+
+<footer class="site-footer">
+<div class="wrap">
+<p>Data: [Gun Violence Archive](https://www.gunviolencearchive.org/){target="_blank" rel="noopener"}. Population estimates: CDC SEER.</p>
+</div>
+</footer>
