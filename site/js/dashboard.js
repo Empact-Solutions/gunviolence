@@ -77,7 +77,10 @@
   function buildOne(rows, base, population, metricType, smoothing, label) {
     const raw = rows.map((r) => valueFor(r, base, population));
     const pop = rows.map((r) => popFor(r, population));
-    const vals = metricType === "rate" ? raw.map((v, i) => toRate(v, pop[i])) : raw;
+    // Annualized (×12) to match the annual-rate convention used everywhere
+    // else on the site (see js/blog-charts.js) — a bare monthly rate is a
+    // much smaller, less legible, and non-comparable number.
+    const vals = metricType === "rate" ? raw.map((v, i) => toRate(v, pop[i]) * 12) : raw;
     const finalVals = smoothing ? rollingMean(vals) : vals;
     return rows
       .map((r, i) => ({ month: r.month, value: finalVals[i], group: label }))
@@ -123,7 +126,7 @@
     const opacityFor = { selected: 1, compared: 0.65 };
     const dashFor = { selected: null, compared: "4,3" };
 
-    const unit = opts.metricType === "rate" ? "per 100,000" : "people";
+    const unit = opts.metricType === "rate" ? "annual rate per 100,000" : "people";
     const populationLabel =
       opts.population === "youth" ? "Youth (12–17)" : opts.population === "child" ? "Children (0–11)" : "Children and youth (0–17)";
 
@@ -134,7 +137,7 @@
       style: { fontFamily: "inherit" },
       x: { label: null },
       y: {
-        label: `${populationLabel} — ${unit}${opts.smoothing ? ", 12-month avg" : ", monthly"}`,
+        label: `${populationLabel} — ${unit}${opts.smoothing ? ", trailing 12-month" : ", single month"}`,
       },
       color: {
         domain: ["Victims", "Perpetrators"],
@@ -192,7 +195,8 @@
     const base = metricKey.startsWith("youth_") ? metricKey.replace("youth_", "") : metricKey.replace("child_", "");
     const raw = rows.map((r) => valueFor(r, base, population));
     const pop = rows.map((r) => popFor(r, population));
-    const vals = metricType === "rate" ? raw.map((v, i) => toRate(v, pop[i])) : raw;
+    // Annualized (×12) — see the matching comment in buildOne() above.
+    const vals = metricType === "rate" ? raw.map((v, i) => toRate(v, pop[i]) * 12) : raw;
     const rolled = rollingMean(vals);
     for (let i = rolled.length - 1; i >= 0; i--) {
       if (rolled[i] != null) return rolled[i];
@@ -248,7 +252,7 @@
       .style("opacity", 0)
       .style("transition", "opacity 0.15s");
 
-    const unitLabel = metricType === "rate" ? "per 100k" : "people/month";
+    const unitLabel = metricType === "rate" ? "annual per 100k" : "people/month";
 
     svg
       .append("g")
@@ -307,7 +311,7 @@
 
     document.getElementById("dash-map").replaceChildren(container.node());
     document.getElementById("dash-map-caption").textContent =
-      `${title} — 12-month average, ${metricType === "rate" ? "per 100,000" : "raw monthly count"}, most recent period ending ${formatMonth(national[national.length - 1].month)}.`;
+      `${title} — 12-month average, ${metricType === "rate" ? "annual rate per 100,000" : "raw monthly count"}, most recent period ending ${formatMonth(national[national.length - 1].month)}.`;
   }
 
   // ---- Wire up events ----
