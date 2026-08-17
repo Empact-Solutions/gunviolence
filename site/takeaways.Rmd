@@ -68,7 +68,7 @@ The rate at which people under 18 experience gun violence as victims is persiste
 #### Youth and child gun violence victims and perpetrators per year per 100,000 people under 18, by month, 2017 - 2026
 <figure class="chart">
 <div id="chart-victims-perps-u18"></div>
-<figcaption>Children and youth (ages 0–17) gun violence victims and perpetrators, annual rate per 100,000 people under 18. The perpetrator rate excludes possession-only offenses. Source: Gun Violence Archive; population denominators from CDC SEER.</figcaption>
+<figcaption>Annulized monthly rates of children and youth (ages 0–17) involved in gun violence victims per 100,000 people under 18. The perpetrator rate excludes possession-only offenses. When viewing the 12-month trailing average, each data point reflects the annual rate for the 12 months ending at that date. Source: Gun Violence Archive; population denominators from CDC SEER.</figcaption>
 </figure>
 
 ## 2. The pandemic-era spike in gun violence was real, but youth were primarily impacted as victims. {#takeaway-2}
@@ -86,7 +86,7 @@ Around the time of the pandemic, the youth gun victimization rate doubled, from 
 #### Youth gun violence victims and perpetrators per year per 100,000 youth, by month, 2017 - 2026
 <figure class="chart">
 <div id="chart-victims-perps"></div>
-<figcaption>Youth (ages 12–17) gun violence victims and perpetrators, annual rate per 100,000 youth. The perpetrator rate excludes possession-only offenses. Source: Gun Violence Archive; population denominators from CDC SEER.</figcaption>
+<figcaption>Annualized monthly rate of youth (ages 12–17) involved in gun violence per 100,000 youth. The perpetrator rate excludes possession-only offenses.  When viewing the 12-month trailing average, each data point reflects the annual rate for the 12 months ending at that date. Source: Gun Violence Archive; population denominators from CDC SEER.</figcaption>
 </figure>
 
 
@@ -137,12 +137,6 @@ Of all the gun violence incidents recorded in the United States, the vast majori
 <figure class="chart">
 <div id="chart-incident-volume"></div>
 <figcaption>All incidents nationally, split by whether a child or youth (ages 0–17) was involved as a victim, as a perpetrator (excluding possession-only offenses), or not at all. 6-month rolling sum. Sources: Gun Violence Archive national incident totals; age-coded incident records.</figcaption>
-</figure>
-
-
-<figure class="chart">
-<div id="chart-incident-share"></div>
-<figcaption>Share of all national incidents that involved a child or youth victim, or a child or youth perpetrator (excluding possession-only offenses). 6-month rolling sum, victim/perpetrator incidents divided by total incidents.</figcaption>
 </figure>
 
 Gun violence in the United States is a significant public safety problem and one that became especially acute in the early part of this decade. But before, during, and after the recent increase, the shape of gun violence in the United States has overwhelmingly been defined by incidents that involved adults alone.
