@@ -130,6 +130,6 @@ Want to see this broken down by state? Head to the [dashboard](dashboard.html). 
 
 <footer class="site-footer">
 <div class="wrap">
-<p>Data: [Gun Violence Archive](https://www.gunviolencearchive.org/){target="_blank" rel="noopener"}. Population estimates: CDC SEER.</p>
+<p>This website was published by Empact Solutions in collaboration with and funding from The Annie E. Casey Foundation. Thank you to The Gun Violence Archive for collecting this data and [The Trace](https://projects.thetrace.org/gun-violence-map/) for making it available to us.</p>
 </div>
 </footer>
