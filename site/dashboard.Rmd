@@ -44,7 +44,33 @@ cat(nav_html("dashboard"))
 
 <section class="dashboard-section">
 <div class="wrap">
-<p class="dashboard-note">Dig into any state, switch between counts and rates, and choose whether to view raw monthly data or a 12-month rolling average — for victims, perpetrators, or both, broken out by children, youth, or both combined. All figures come from Gun Violence Archive incident records. Rates are an annual rate per 100,000 residents in the relevant age group, using CDC SEER population estimates. Rolling averages, where selected, are calculated as a trailing 12-month mean.</p>
+<p class="dashboard-note">Explore trends in any state. This dashboard allows you to switch between counts and rates, choose whether to view raw monthly data or a 12-month rolling average, and explore trends for youth (age 12-17), children (age 0-11), or all children under age 18. This dashboard also allows you to include or exclude incidents that involved only a person under age 18 posessing a firearm. All figures come from Gun Violence Archive. Rates are an annual rate per 100,000 residents in the relevant age group, using CDC SEER single-age population estimates. Rolling averages, where selected, are calculated as a trailing 12-month mean.</p>
+
+<h2>Map of Child and Youth Involvement in Gun Violence, March 2025 through February 2026</h2>
+<div class="dashboard-controls">
+<div class="control">
+<label for="ctl-map-metric">Map metric</label>
+<select id="ctl-map-metric">
+<option value="youth_victim">Youth (12–17) victimization</option>
+<option value="youth_perp_minus_possession">Youth (12–17) offenses (excl. possession)</option>
+<option value="child_victim">Children (0–11) victimization</option>
+<option value="child_perp_minus_possession">Children (0–11) offenses (excl. possession)</option>
+</select>
+</div>
+<div class="control">
+<label for="ctl-metric-type">View</label>
+<select id="ctl-metric-type">
+<option value="rate">Rate per 100,000</option>
+<option value="count">Raw counts</option>
+</select>
+</div>
+</div>
+
+<figure class="chart">
+<div id="dash-map"></div>
+<figcaption id="dash-map-caption"></figcaption>
+</figure>
+<br>
 
 <div class="dashboard-controls">
 <div class="control">
@@ -104,30 +130,6 @@ cat(nav_html("dashboard"))
 <figure class="chart">
 <div id="dash-trend"></div>
 <figcaption>Selected state(s) and any comparisons. "United States" behaves like any other selection — pick it explicitly to see the national trend.</figcaption>
-</figure>
-
-<div class="dashboard-controls">
-<div class="control">
-<label for="ctl-map-metric">Map metric</label>
-<select id="ctl-map-metric">
-<option value="youth_victim">Youth (12–17) victimization</option>
-<option value="youth_perp_minus_possession">Youth (12–17) offenses (excl. possession)</option>
-<option value="child_victim">Children (0–11) victimization</option>
-<option value="child_perp_minus_possession">Children (0–11) offenses (excl. possession)</option>
-</select>
-</div>
-<div class="control">
-<label for="ctl-metric-type">View</label>
-<select id="ctl-metric-type">
-<option value="rate">Rate per 100,000</option>
-<option value="count">Raw counts</option>
-</select>
-</div>
-</div>
-
-<figure class="chart">
-<div id="dash-map"></div>
-<figcaption id="dash-map-caption"></figcaption>
 </figure>
 
 <p>Want the headline findings first? Read the <a href="takeaways.html">key takeaways</a>. Curious about the data itself? See <a href="about.html">about the Gun Violence Archive</a>.</p>

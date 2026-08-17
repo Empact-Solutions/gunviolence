@@ -31,7 +31,7 @@
   // ---- Populate selects ----
   const stateSelect = document.getElementById("ctl-state");
   stateSelect.innerHTML = stateNamesSelectable.map((s) => `<option value="${s}">${s}</option>`).join("");
-  stateSelect.value = stateNamesGeo.includes("California") ? "California" : stateNamesGeo[0];
+  stateSelect.value = "United States";
 
   const compareSelect = document.getElementById("ctl-compare");
   compareSelect.innerHTML = stateNamesSelectable.map((s) => `<option value="${s}">${s}</option>`).join("");
@@ -214,10 +214,15 @@
       stateNamesGeo.map((s) => [s, latestValueForState(byState.get(s), metricKey, metricType)])
     );
 
-    const values = [...valuesByState.values()].filter((v) => v != null && !isNaN(v));
-    const color = d3.scaleQuantile().domain(values).range(colorScheme);
-    const extent = d3.extent(values);
-    const mid = d3.quantile([...values].sort(d3.ascending), 0.5);
+    // DC's tiny population makes its per-capita rate an outlier that would
+    // otherwise dominate the quantile breaks — excluded from the domain, but
+    // still colored on the map (clamped to the scale's top bin).
+    const domainValues = [...valuesByState.entries()]
+      .filter(([s, v]) => s !== "District of Columbia" && v != null && !isNaN(v))
+      .map(([, v]) => v);
+    const color = d3.scaleQuantile().domain(domainValues).range(colorScheme);
+    const extent = d3.extent(domainValues);
+    const mid = d3.quantile([...domainValues].sort(d3.ascending), 0.5);
 
     // The projection fills a 960x600 area; the legend gets its own band
     // below that, outside the geographic drawing area entirely, so it can
@@ -309,9 +314,12 @@
     legend.append("g").call(legendAxis).select(".domain").remove();
     legend.append("text").attr("x", 0).attr("y", -6).attr("font-size", 12).attr("fill", "#444").text(title);
 
+    const periodEnd = national[national.length - 1].month;
+    const periodStart = new Date(periodEnd.getFullYear(), periodEnd.getMonth() - 11, 1);
+
     document.getElementById("dash-map").replaceChildren(container.node());
     document.getElementById("dash-map-caption").textContent =
-      `${title} — 12-month average, ${metricType === "rate" ? "annual rate per 100,000" : "raw monthly count"}, most recent period ending ${formatMonth(national[national.length - 1].month)}.`;
+      `${title} — 12-month average, ${metricType === "rate" ? "annual rate per 100,000" : "raw monthly count"}, ${formatMonth(periodStart)} to ${formatMonth(periodEnd)}.`;
   }
 
   // ---- Wire up events ----

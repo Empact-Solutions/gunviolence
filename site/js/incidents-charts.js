@@ -15,7 +15,6 @@
   const noChildYouth = rollingSum(rows.map((d) => d.incidents_no_child_youth), WINDOW);
   const victimCY = rollingSum(rows.map((d) => d.incidents_victim_child_youth), WINDOW);
   const perpCY = rollingSum(rows.map((d) => d.incidents_perp_child_youth), WINDOW);
-  const totalRoll = rollingSum(rows.map((d) => d.total_incidents), WINDOW);
 
   function seriesFor(rolled, group) {
     return rows.map((d, i) => ({ month: d.month, value: rolled[i], group })).filter((d) => d.value != null);
@@ -60,54 +59,8 @@
     document.getElementById("chart-incident-volume").replaceChildren(plot);
   }
 
-  // ---- Chart: share of all incidents involving a child/youth victim or perpetrator ----
-  function chartShare() {
-    function shareSeries(rolled, group) {
-      return rows
-        .map((d, i) => ({
-          month: d.month,
-          value: rolled[i] != null && totalRoll[i] ? (rolled[i] / totalRoll[i]) * 100 : null,
-          group,
-        }))
-        .filter((d) => d.value != null);
-    }
-
-    const data = [
-      ...shareSeries(victimCY, "Child or youth victim"),
-      ...shareSeries(perpCY, "Child or youth perpetrator"),
-    ];
-
-    const plot = Plot.plot({
-      width: Math.min(880, document.getElementById("chart-incident-share").clientWidth),
-      height: 340,
-      marginRight: 20,
-      style: { fontFamily: "inherit" },
-      x: { label: null },
-      y: { label: "% of all incidents (6-month rolling)" },
-      color: {
-        domain: ["Child or youth victim", "Child or youth perpetrator"],
-        range: [PALETTE.victim, PALETTE.perp],
-        legend: true,
-      },
-      marks: [
-        Plot.ruleY([0]),
-        Plot.line(data, {
-          x: "month",
-          y: "value",
-          stroke: "group",
-          strokeWidth: 2.5,
-          title: (d) => `${d.group}\n${formatMonth(d.month)}: ${d.value.toFixed(1)}%`,
-          tip: true,
-        }),
-      ],
-    });
-    document.getElementById("chart-incident-share").replaceChildren(plot);
-  }
-
   chartVolume();
-  chartShare();
   window.addEventListener("resize", () => {
     chartVolume();
-    chartShare();
   });
 })();
