@@ -54,7 +54,6 @@ cat(nav_html("dashboard"))
 <option value="youth_victim">Youth (12–17) victimization</option>
 <option value="youth_perp_minus_possession">Youth (12–17) offenses (excl. possession)</option>
 <option value="child_victim">Children (0–11) victimization</option>
-<option value="child_perp_minus_possession">Children (0–11) offenses (excl. possession)</option>
 </select>
 </div>
 <div class="control">

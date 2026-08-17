@@ -31,6 +31,7 @@
     const plot = Plot.plot({
       width: Math.min(880, document.getElementById("chart-incident-volume").clientWidth),
       height: 400,
+      marginLeft: 70,
       marginRight: 20,
       style: { fontFamily: "inherit" },
       x: { label: null },
@@ -59,8 +60,53 @@
     document.getElementById("chart-incident-volume").replaceChildren(plot);
   }
 
+  // ---- Chart: total incidents over the full 2017–2026 period, by category ----
+  // Categories aren't mutually exclusive (an incident can have both a
+  // child/youth victim and perpetrator), so bars are independent totals, not
+  // a stacked breakdown — matching how the same three series are shown as
+  // separate (not stacked) lines in chartVolume() above. Percentages are each
+  // category's share of all incidents nationally over the period.
+  function chartVolumeAllTime() {
+    const totalIncidents = d3.sum(rows, (d) => d.total_incidents);
+    const categories = [
+      { group: "No child or youth involved", value: d3.sum(rows, (d) => d.incidents_no_child_youth), fill: PALETTE.neutral },
+      { group: "Child or youth victim", value: d3.sum(rows, (d) => d.incidents_victim_child_youth), fill: PALETTE.victim },
+      { group: "Child or youth perpetrator", value: d3.sum(rows, (d) => d.incidents_perp_child_youth), fill: PALETTE.perp },
+    ].map((d) => ({ ...d, pct: (d.value / totalIncidents) * 100 }));
+
+    const plot = Plot.plot({
+      width: Math.min(880, document.getElementById("chart-incident-volume-all-time").clientWidth),
+      height: 400,
+      marginTop: 30,
+      marginLeft: 70,
+      style: { fontFamily: "inherit" },
+      x: { label: null, type: "band", domain: categories.map((d) => d.group) },
+      y: { label: "Total incidents, 2017–2026", grid: false },
+      marks: [
+        Plot.ruleY([0]),
+        Plot.barY(categories, {
+          x: "group",
+          y: "value",
+          fill: "fill",
+          title: (d) => `${d.group}\n${Math.round(d.value).toLocaleString()} incidents (${d.pct.toFixed(0)}%)`,
+          tip: true,
+        }),
+        Plot.text(categories, {
+          x: "group",
+          y: "value",
+          text: (d) => `${Math.round(d.value).toLocaleString()} (${d.pct.toFixed(0)}%)`,
+          dy: -8,
+          fontWeight: 700,
+        }),
+      ],
+    });
+    document.getElementById("chart-incident-volume-all-time").replaceChildren(plot);
+  }
+
   chartVolume();
+  chartVolumeAllTime();
   window.addEventListener("resize", () => {
     chartVolume();
+    chartVolumeAllTime();
   });
 })();

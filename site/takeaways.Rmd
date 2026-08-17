@@ -48,7 +48,7 @@ cat(nav_html("takeaways"))
 
 ## 1. Youth and children are more involved in gun violence as victims than as perpetrators.
 
-People under 18 are involved in gun violence far more often as victims than as perpetrators. Since 2017, 1.7 times as many youth and children have been **victimized** by gun violence as involved as perpetrators. This figure excludes victimless incidents that involve only possession of a firearm. At the height of the recent spike in gun violence, children and youth were **twice** as likely to be victims of gun violence than perpetrators. The experience of children and youth as victims of gun violence is one of the most overlooked and enduring trends in the GVA data.
+The rate at which people under 18 experience gun violence as victims is persistently higher than the rate they are involved in gun violence as perpetrators. Since 2017, 1.7 times as many youth and children have been **victimized** by gun violence as involved as perpetrators. This figure excludes victimless incidents that involve only possession of a firearm. At the height of the recent spike in gun violence, children and youth were **more than twice** as likely to be victims of gun violence than perpetrators. The predominance of victimization over perpetration is the most persistent and striking pattern in the GVA data with respect to young people.
 
 #### Ratio of youth gun violence victims to perpetrators, by year, 2017 - 2025
 <figure class="chart">
@@ -56,9 +56,9 @@ People under 18 are involved in gun violence far more often as victims than as p
 <figcaption>Youth (ages 12–17) gun violence victims per perpetrator, by calendar year — raw counts, not rates. Perpetrator counts exclude possession-only offenses. The dashed line marks the average ratio across all nine full years shown; 2026 is excluded as a partial year (data through February only). Source: Gun Violence Archive.</figcaption>
 </figure>
 
-## 2. The pandemic-era spike in gun violence was real, and youth were primarily impacted as victims. 
+## 2. The pandemic-era spike in gun violence was real, but youth were primarily impacted as victims.
 
-Around the time of the pandemic, the youth gun victimization rate doubled, from about than 10 per 100k per year in February 2019 to more than 20 in June 2023 (measured by the rolling 12-month average). The rate at which youth were involved in gun violence as perpetrators also increased significantly during this time frame, but the magnitude was far smaller. Where youth victimization per 100,000 increased by 10 youth per year, perpetration rates increases by just 3 youth per 100,000 per year - nearly a 50% increase but a much smaller magnitude. According to the GVA data, the increase in youth **victimization** by firearms is the biggest story to tell about changing gun violence around the time of the pandemic. Notably, in the media and public imagination, this victimization story was often misconstrued as a story about youth violence being out of control.
+Around the time of the pandemic, the youth gun victimization rate doubled, from about than 10 per 100k per year in February 2019 to more than 20 in June 2023 (measured by the rolling 12-month average). The rate at which youth were involved in gun violence as perpetrators also increased significantly during this time frame, but the magnitude was far smaller. Where youth victimization per 100,000 increased by 10 youth per year, perpetration rates increased by just 3 youth per 100,000 per year - nearly a 50% increase but a much smaller magnitude. According to the GVA data, the increase in youth **victimization** by firearms is the biggest story to tell about changing gun violence around the time of the pandemic. Yet this victimization story was often misconstrued, particularly in [the news media](https://reportforyouthjustice.org/#briefs), as a story about youth violence being out of control.
 
 <div class="chart-controls">
 <label class="toggle">
@@ -76,7 +76,7 @@ Around the time of the pandemic, the youth gun victimization rate doubled, from 
 
 ## 3. The pandemic-era surge is over.
 
-The pandemic-era surge in victimization and perpetration is over. Youth and child involvement in gun violence has fallen substantially from its peak — for victims and perpetrators alike. Children's involvement in gun violence is down approximately 40%. Youth involvement in gun violence as victims is down by nearly one-third, and youth involvement in perpetrating gun violence is down 19%. 
+The pandemic-era surge in victimization and perpetration is over. Youth and child involvement in gun violence has fallen substantially from its peak — for victims and perpetrators alike, in both age groups. Children's involvement in gun violence is down approximately 40%. Youth involvement in gun violence as victims is down by nearly one-third, and youth involvement in perpetrating gun violence is down 19%. 
 
 <div class="stat-cards-intro">
 <p>Change from each group's pandemic-era peak (12-month average, 2020&ndash;2024) to the most recent 12-month average.</p>
@@ -111,11 +111,24 @@ The pandemic-era surge in victimization and perpetration is over. Youth and chil
 
 <p class="stat-cards-source">Source: percent change from each series' pandemic-era peak (12-month average, largest value between 2020 and 2024) to the most recent month. Perpetrator figures exclude possession-only offenses.</p>
 
+Whatever surge in youth gun violence the pandemic produced, it has substantially reversed — on both sides of the ledger, for both age groups.
 
-## 4. Youth violence is a small part of the picture compared to adults.
+## 4. Gun violence is overwhelmingly an adults-driven problem. That was true before, during, and after the pandemic-era surge in gun violence.
 
-Of all the gun violence incidents recorded in the United States, the vast majority does not involve people under 18 at all. **Across the full 2017–2026 period, about 85% of incidents involve only adults.** Gun violence is overwhelmingly an adult phenomenon. This chart shows the total number of incidents involving adults alone versus people under age 18 as victims or perpetrators. The number of adult-alone incidents increased 60% over its pre-pandemic level, where children- or youth-involved incidents increased a relatively modest 34%.
+Of all the gun violence incidents recorded in the United States, the vast majority does not involve youth or children at all. **Across the full 2017–2026 period, more than 85% of incidents involve only adults.** Just 15% of incidents involved youth. Gun violence is overwhelmingly an adult phenomenon.
 
+<figure class="chart">
+<div id="chart-incident-volume-all-time"></div>
+<figcaption>Total incidents nationally, 2017–2026, split by whether a child or youth (ages 0–17) was involved as a victim, as a perpetrator (excluding possession-only offenses), or not at all. Sources: Gun Violence Archive national incident totals; age-coded incident records.</figcaption>
+</figure>
+
+This chart shows the total number of incidents involving adults alone versus incidents involving youth as victims or perpetrators. It shows that both adults-only and youth-involved incidents have fluctuated in recent years, but the upswings and downswings have occurred at different speeds and different times.
+
+* In early 2020, the number of adult-only incidents rose much faster than youth-involved incidents, and then decreased steadily from 2022 to 2026.
+* Youth-involved incidents increased more gradually from 2020 through 2023, before starting to decline. 
+* Since late 2023, youth-involved and adults-only incidents have fallen together, by more than 40%.
+
+These timing differences did little to change the share of adults-only incidents in the GVA, which was around 85% before the COVID-19 pandemic, rose as high as around 87% in 2021, and hovered around 83% as of early 2026.
 
 <figure class="chart">
 <div id="chart-incident-volume"></div>

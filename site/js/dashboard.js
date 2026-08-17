@@ -167,27 +167,29 @@
   const geoFeatures = topojson.feature(topology, topology.objects.states).features;
   const fipsToName = new Map(geoFeatures.map((f) => [f.id, f.properties.name]));
   const mesh = topojson.mesh(topology, topology.objects.states, (a, b) => a !== b);
+  // Interior state-to-state borders only exclude the coastline (an arc used
+  // by just one state doesn't satisfy that filter) — the nation object's own
+  // mesh supplies that outer/coastal boundary so states like Florida get a
+  // border on their sea side too, not just where they touch another state.
+  const nationMesh = topojson.mesh(topology, topology.objects.nation);
 
   const mapTitles = {
     youth_victim: "Youth (12–17) victimization",
     youth_perp_minus_possession: "Youth (12–17) offenses (excl. possession)",
     child_victim: "Children (0–11) victimization",
-    child_perp_minus_possession: "Children (0–11) offenses (excl. possession)",
   };
   // Colored by role (victim/perpetrator), matching every other chart on the
   // site — the age-group split doesn't need its own hue since only one metric
   // is ever shown on the map at a time.
   const mapColors = {
-    youth_victim: sequentialRamp(PALETTE.victim),
-    youth_perp_minus_possession: sequentialRamp(PALETTE.perp),
-    child_victim: sequentialRamp(PALETTE.victim),
-    child_perp_minus_possession: sequentialRamp(PALETTE.perp),
+    youth_victim: sequentialRamp(PALETTE.victim, 9),
+    youth_perp_minus_possession: sequentialRamp(PALETTE.perp, 9),
+    child_victim: sequentialRamp(PALETTE.victim, 9),
   };
   const mapPopulation = {
     youth_victim: "youth",
     youth_perp_minus_possession: "youth",
     child_victim: "child",
-    child_perp_minus_possession: "child",
   };
 
   function latestValueForState(rows, metricKey, metricType) {
@@ -218,11 +220,11 @@
     // otherwise dominate the quantile breaks — excluded from the domain, but
     // still colored on the map (clamped to the scale's top bin).
     const domainValues = [...valuesByState.entries()]
-      .filter(([s, v]) => s !== "District of Columbia" && v != null && !isNaN(v))
+      .filter(([s, v]) => s !== "District of Columbia" && v != null && !isNaN(v) && v >= 0)
       .map(([, v]) => v);
     const color = d3.scaleQuantile().domain(domainValues).range(colorScheme);
+    const quantiles = color.quantiles();
     const extent = d3.extent(domainValues);
-    const mid = d3.quantile([...domainValues].sort(d3.ascending), 0.5);
 
     // The projection fills a 960x600 area; the legend gets its own band
     // below that, outside the geographic drawing area entirely, so it can
@@ -289,18 +291,18 @@
       });
 
     svg.append("path").datum(mesh).attr("fill", "none").attr("stroke", "black").attr("stroke-width", 0.7).attr("d", path);
+    svg.append("path").datum(nationMesh).attr("fill", "none").attr("stroke", "black").attr("stroke-width", 0.7).attr("d", path);
 
     const legendWidth = 260,
       legendHeight = 12,
       legendX = (width - legendWidth) / 2,
       legendY = mapHeight + 30;
     const binWidth = legendWidth / colorScheme.length;
-    const legendScale = d3.scaleLinear().domain(extent).range([0, legendWidth]);
-    const legendAxis = d3
-      .axisBottom(legendScale)
-      .tickValues([extent[0], mid, extent[1]])
-      .tickFormat(d3.format(".1f"))
-      .tickSize(legendHeight + 4);
+    const fmt = d3.format(".0f");
+    // Bins are equal-*count* (quantile), not equal-width in value, so ticks
+    // are placed at each swatch boundary (i * binWidth) and labeled with the
+    // actual bin-boundary value — a linear value scale would mislabel them.
+    const legendTicks = [extent[0], ...quantiles, extent[1]];
 
     const legend = svg.append("g").attr("transform", `translate(${legendX},${legendY})`);
     legend
@@ -311,7 +313,27 @@
       .attr("width", binWidth)
       .attr("height", legendHeight)
       .attr("fill", (d) => d);
-    legend.append("g").call(legendAxis).select(".domain").remove();
+    legend
+      .selectAll("line.tick-mark")
+      .data(legendTicks)
+      .join("line")
+      .attr("class", "tick-mark")
+      .attr("x1", (d, i) => i * binWidth)
+      .attr("x2", (d, i) => i * binWidth)
+      .attr("y1", legendHeight)
+      .attr("y2", legendHeight + 4)
+      .attr("stroke", "#444");
+    legend
+      .selectAll("text.tick-label")
+      .data(legendTicks)
+      .join("text")
+      .attr("class", "tick-label")
+      .attr("x", (d, i) => i * binWidth)
+      .attr("y", legendHeight + 15)
+      .attr("text-anchor", (d, i) => (i === 0 ? "start" : i === legendTicks.length - 1 ? "end" : "middle"))
+      .attr("font-size", 10)
+      .attr("fill", "#444")
+      .text((d) => fmt(d));
     legend.append("text").attr("x", 0).attr("y", -6).attr("font-size", 12).attr("fill", "#444").text(title);
 
     const periodEnd = national[national.length - 1].month;
