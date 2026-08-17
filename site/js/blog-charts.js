@@ -29,43 +29,25 @@
       : `Annual rate per 100,000 ${populationLabel} (single month, annualized)`;
   }
 
-  // Peak-and-latest annotation pair for one (already smoothed) series.
-  // `peakDy`/`latestDy` control which side of each point the tip sits on
-  // (negative = tip above/"bottom"-anchored, positive = tip below/"top"-
-  // anchored — see tipAnchor) and let the caller pull the two series' tips
-  // apart when their points are close together (see chartVictimsPerps).
-  function peakAndLatestAnnotations(data, group, color, { peakDy = -10, latestDy = -10, peakAnchor: peakAnchorOverride } = {}) {
+  // Endpoint annotation for one (already smoothed) series: how far the
+  // latest value has fallen from that series' peak. `dy` lets the caller
+  // pull the two series' tips apart vertically (see chartVictimsPerps).
+  function latestAnnotation(data, group, color, dy) {
     const peak = data.reduce((a, b) => (b.value > a.value ? b : a));
     const latest = data[data.length - 1];
     const declinePct = ((peak.value - latest.value) / peak.value) * 100;
-
-    // Anchor away from whichever edge of the date range the point is near,
-    // so the wrapped text doesn't run off the side of the chart — unless the
-    // caller pins it explicitly (e.g. "middle" to center the tip).
-    const firstMonth = data[0].month.getTime();
-    const lastMonth = data[data.length - 1].month.getTime();
-    const mid = (firstMonth + lastMonth) / 2;
-    const peakAnchor = peakAnchorOverride ?? (peak.month.getTime() < mid ? "start" : "end");
-
-    const base = { group, fill: color, fontWeight: 600, fontSize: 11, lineWidth: 15 };
-    return [
-      {
-        ...base,
-        month: peak.month,
-        value: peak.value,
-        dy: peakDy,
-        textAnchor: peakAnchor,
-        text: `Peak of ${peak.value.toFixed(1)} per 100k in ${formatMonth(peak.month)}`,
-      },
-      {
-        ...base,
-        month: latest.month,
-        value: latest.value,
-        dy: latestDy,
-        textAnchor: "end",
-        text: `${formatMonth(latest.month)}: ${latest.value.toFixed(1)} per 100k (-${declinePct.toFixed(0)}%)`,
-      },
-    ];
+    return {
+      group,
+      fill: color,
+      fontWeight: 600,
+      fontSize: 11,
+      lineWidth: 15,
+      month: latest.month,
+      value: latest.value,
+      dy,
+      textAnchor: "end",
+      text: `-${declinePct.toFixed(0)}% from peak (${latest.value.toFixed(1)} per 100k)`,
+    };
   }
 
   // Maps an annotation's dy sign + textAnchor to the nearest Plot.tip
@@ -89,22 +71,17 @@
     }));
     const data = victims.concat(perps);
 
+    // Latest-value tips land in the same bottom-right corner of the chart,
+    // so perpetrators' is pushed down a bit further to clear victims'.
     const annotations = smoothed1
-      ? [
-          // Victims' latest tip now sits below its point ("top"-anchored)
-          // rather than above; perpetrators' peak tip does the same. Both
-          // series' latest tips land in the same bottom-right corner of the
-          // chart, so perpetrators' is pushed further down to clear victims'.
-          ...peakAndLatestAnnotations(victims, "Victims", PALETTE.victim, { peakDy: -10, latestDy: 30, peakAnchor: "middle" }),
-          ...peakAndLatestAnnotations(perps, "Perpetrators", PALETTE.perp, { peakDy: 20, latestDy: 60 }),
-        ]
+      ? [latestAnnotation(victims, "Victims", PALETTE.victim, 26), latestAnnotation(perps, "Perpetrators", PALETTE.perp, 26)]
       : [];
 
     const plot = Plot.plot({
       width: Math.min(880, document.getElementById("chart-victims-perps").clientWidth),
       height: 380,
       marginRight: 90,
-      marginTop: 70,
+      marginTop: 40,
       style: { fontFamily: "inherit" },
       x: { label: null },
       y: { label: yLabel("youth", smoothed1) },
@@ -121,8 +98,10 @@
           stroke: "group",
           strokeWidth: smoothed1 ? 2.5 : 1,
           strokeOpacity: smoothed1 ? 1 : 0.7,
+          title: (d) => `${d.group}\n${formatMonth(d.month)}: ${d.value.toFixed(1)} per 100,000`,
+          tip: true,
         }),
-           ...annotations.map((a) =>
+        ...annotations.map((a) =>
           Plot.tip([a], {
             x: (d) => d.month,
             y: (d) => d.value,
