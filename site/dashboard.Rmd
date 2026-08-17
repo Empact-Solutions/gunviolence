@@ -44,7 +44,7 @@ cat(nav_html("dashboard"))
 
 <section class="dashboard-section">
 <div class="wrap">
-<p class="dashboard-note">Explore trends in any state. This dashboard allows you to switch between counts and rates, choose whether to view raw monthly data or a 12-month rolling average, and explore trends for youth (age 12-17), children (age 0-11), or all children under age 18. This dashboard also allows you to include or exclude incidents that involved only a person under age 18 posessing a firearm. All figures come from Gun Violence Archive. Rates are an annual rate per 100,000 residents in the relevant age group, using CDC SEER single-age population estimates. Rolling averages, where selected, are calculated as a trailing 12-month mean.</p>
+<p class="dashboard-note">Explore trends in any state. This dashboard allows you to switch between counts and rates, choose whether to view raw monthly data or a 12-month rolling average, and explore trends for youth (age 12-17), children (age 0-11), or all children under age 18. This dashboard also allows you to include or exclude incidents that involved only a person under age 18 possessing a firearm. All figures come from Gun Violence Archive. Rates are an annual rate per 100,000 residents in the relevant age group, using CDC SEER single-age population estimates. Rolling averages, where selected, are calculated as a trailing 12-month mean.</p>
 
 <h2>Map of Child and Youth Involvement in Gun Violence, March 2025 through February 2026</h2>
 <div class="dashboard-controls">

@@ -58,7 +58,7 @@ The rate at which people under 18 experience gun violence as victims is persiste
 
 ## 2. The pandemic-era spike in gun violence was real, but youth were primarily impacted as victims.
 
-Around the time of the pandemic, the youth gun victimization rate doubled, from about than 10 per 100k per year in February 2019 to more than 20 in June 2023 (measured by the rolling 12-month average). The rate at which youth were involved in gun violence as perpetrators also increased significantly during this time frame, but the magnitude was far smaller. Where youth victimization per 100,000 increased by 10 youth per year, perpetration rates increased by just 3 youth per 100,000 per year - nearly a 50% increase but a much smaller magnitude. According to the GVA data, the increase in youth **victimization** by firearms is the biggest story to tell about changing gun violence around the time of the pandemic. Yet this victimization story was often misconstrued, particularly in [the news media](https://reportforyouthjustice.org/#briefs), as a story about youth violence being out of control.
+Around the time of the pandemic, the youth gun victimization rate doubled, from about 10 per 100k per year in February 2019 to more than 20 in June 2023 (measured by the rolling 12-month average). The rate at which youth were involved in gun violence as perpetrators also increased significantly during this time frame, but the magnitude was far smaller. Where youth victimization per 100,000 increased by 10 youth per year, perpetration rates increased by just 3 youth per 100,000 per year - nearly a 50% increase but a much smaller magnitude. According to the GVA data, the increase in youth **victimization** by firearms is the biggest story to tell about changing gun violence around the time of the pandemic. Yet this victimization story was often misconstrued, particularly in [the news media](https://reportforyouthjustice.org/#briefs), as a story about youth violence being out of control.
 
 <div class="chart-controls">
 <label class="toggle">
@@ -115,14 +115,14 @@ Whatever surge in youth gun violence the pandemic produced, it has substantially
 
 ## 4. Gun violence is overwhelmingly an adults-driven problem. That was true before, during, and after the pandemic-era surge in gun violence.
 
-Of all the gun violence incidents recorded in the United States, the vast majority does not involve youth or children at all. **Across the full 2017–2026 period, more than 85% of incidents involve only adults.** Just 15% of incidents involved youth. Gun violence is overwhelmingly an adult phenomenon.
+Of all the gun violence incidents recorded in the United States, the vast majority does not involve youth or children at all. **Across the full 2017–2026 period, more than 85% of incidents involve only adults.** Just 15% of incidents involve a child or youth. Gun violence is overwhelmingly an adult phenomenon.
 
 <figure class="chart">
 <div id="chart-incident-volume-all-time"></div>
 <figcaption>Total incidents nationally, 2017–2026, split by whether a child or youth (ages 0–17) was involved as a victim, as a perpetrator (excluding possession-only offenses), or not at all. Sources: Gun Violence Archive national incident totals; age-coded incident records.</figcaption>
 </figure>
 
-This chart shows the total number of incidents involving adults alone versus incidents involving youth as victims or perpetrators. It shows that both adults-only and youth-involved incidents have fluctuated in recent years, but the upswings and downswings have occurred at different speeds and different times.
+This chart shows the total number of incidents involving adults alone versus incidents involving a child or youth as a victim or perpetrator. It shows that both adults-only and youth-involved incidents have fluctuated in recent years, but the upswings and downswings have occurred at different speeds and different times.
 
 * In early 2020, the number of adult-only incidents rose much faster than youth-involved incidents, and then decreased steadily from 2022 to 2026.
 * Youth-involved incidents increased more gradually from 2020 through 2023, before starting to decline. 

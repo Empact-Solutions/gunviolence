@@ -67,11 +67,16 @@ The remainder of this site examines data about youth violence shared with us fro
 </a>
 <a class="card" href="about.html">
 <h3>About the Gun Violence Archive</h3>
-<p>Where this data comes from, how it's collected, and how we defined victims, perpetrators, and rates.</p>
+<p>Where this data comes from, how it’s collected, and how we defined victims, perpetrators, and rates.</p>
 <span class="card-cta">Read the methodology →</span>
 </a>
 </section>
 
-The analyses presented here are the work of [Tom Woods](https://www.aecf.org/people/tom-woods), [Cyrus O'Brien](https://www.cyrusobrien.com/), and [Jason Melchi](https://empactsolutions.org/our-team/). This website was built in collaboration with and with funding from The Annie E. Casey Foundation. 
 
 </main>
+
+<footer class="site-footer">
+<div class="wrap">
+<p>The analyses presented here are the work of [Tom Woods](https://www.aecf.org/people/tom-woods), [Cyrus O'Brien](https://www.cyrusobrien.com/), and [Jason Melchi](https://empactsolutions.org/our-team/). This website was published by Empact Solutions in collaboration with and funding from The Annie E. Casey Foundation. Thank you to The Gun Violence Archive for collecting this data and [The Trace](https://projects.thetrace.org/gun-violence-map/) for making it available to us.</p>
+</div>
+</footer>

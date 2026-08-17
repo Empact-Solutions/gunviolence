@@ -39,7 +39,7 @@ cat(nav_html("about"))
 
 <main class="wrap article">
 
-The [Gun Violence Archive](https://www.gunviolencearchive.org/){target="_blank" rel="noopener"} (GVA) is an independent, nonprofit research group that has tracked gun violence incidents across the United States in near-real time since 2013. GVA compiles incident records from thousands of sources — police reports, government agencies, and media accounts — and verifies each one before adding it to its database. It's one of the most complete public records of American gun violence available, and it's the primary data source behind everything on this site.
+The [Gun Violence Archive](https://www.gunviolencearchive.org/){target="_blank" rel="noopener"} (GVA) is an independent, nonprofit research group that has tracked gun violence incidents across the United States in near-real time since 2013. GVA compiles incident records from thousands of sources — police reports, government agencies, and media accounts — and verifies each one before adding it to its database. It’s one of the most complete public records of American gun violence available, and it’s the primary data source behind everything on this site.
 
 The data behind this site was shared with us by [The Trace](https://projects.thetrace.org/gun-violence-map/){target="_blank" rel="noopener"}, a nonprofit newsroom that covers gun violence in America. You can explore the underlying GVA data in more detail on their interactive map.
 
@@ -47,9 +47,9 @@ The data behind this site was shared with us by [The Trace](https://projects.the
 
 GVA logs each person touched by a gun incident individually — as a victim, a perpetrator, or both — along with their age or age-group. We used those individual records to build the charts and dashboard on this site, aggregating up to national and state-level rates rather than reporting on individual incidents.
 
-"Victim" is defined broadly, following GVA's own methodology: it includes anyone shot, anyone injured in a firearm assault, anyone caught up in an armed incident that didn't result in injury (robbery, burglary, home invasion, road rage), and victims of suicide. Most of the victimizations referenced on this site involved someone being shot, but the broader definition means the victim counts here capture more than shootings alone.
+"Victim" is defined broadly, following GVA’s own methodology: it includes anyone shot, anyone injured in a firearm assault, anyone caught up in an armed incident that didn’t result in injury (robbery, burglary, home invasion, road rage), and victims of suicide. Most of the victimizations referenced on this site involved someone being shot, but the broader definition means the victim counts here capture more than shootings alone.
 
-"Perpetrator" means someone GVA's records identify as responsible for a gun incident — including, in some cases, someone arrested only for illegally possessing a firearm, with no other offense attached. Because possession-only arrests can behave very differently from offenses involving an actual shooting or threat, every perpetrator rate on this site excludes them unless we say otherwise, and we label possession-only figures separately wherever we show them.
+"Perpetrator" means someone GVA’s records identify as responsible for a gun incident — including, in some cases, someone arrested only for illegally possessing a firearm, with no other offense attached. Because possession-only arrests can behave very differently from offenses involving an actual shooting or threat, every perpetrator rate on this site excludes them unless we say otherwise, and we label possession-only figures separately wherever we show them.
 
 We included data from 2017 through February 2026 - and excluded data prior to 2017 - because assessments of the [completeness and sensitivity](https://pmc.ncbi.nlm.nih.gov/articles/PMC10238941/) of GVA data have found that the archive has improved over time.
 
@@ -61,16 +61,17 @@ GVA categorizes people under 18 in two groups: children (ages 0–11) and youth 
 
 Wherever this site reports a rate — per 100,000 youth, per 100,000 children, or per 100,000 residents — the population denominator comes from [CDC SEER population estimates](https://seer.cancer.gov/popdata/download.html), broken out by state, year, and age. National rates sum the underlying state-level estimates.
 
-Where a chart shows an "annual rate," we've either summed 12 months of incidents directly or annualized a single month or a trailing 12-month average by multiplying it by 12. Either way, the goal is a rate expressed per year rather than per month, since a single month's rate on its own is a very small, hard-to-interpret number.
+Where a chart shows an "annual rate," we’ve either summed 12 months of incidents directly or annualized a single month or a trailing 12-month average by multiplying it by 12. Either way, the goal is a rate expressed per year rather than per month, since a single month’s rate on its own is a very small, hard-to-interpret number.
 
-## Data Limitations and Comparability
+## Data limitations and comparability
+
 GVA’s data is a record of gun violence incidents that are publicly known and documented by the police, a government agency, or the media; incidents that never generate a public record aren’t captured. That means changes in reporting practices, policing, or media coverage can move these numbers independent of any real change in gun violence itself. Like any dataset built from public records, it reflects, not just how often gun violence incidents happen, but whether and how they are reported. The GVA’s data collection methodology is described in detail at the Gun Violence Archive’s [General Methodology](https://www.gunviolencearchive.org/methodology) page.
 
 Researchers have found that GVA is a useful and reliable source for [tracking gun violence](https://www.cnn.com/2022/08/14/us/gun-violence-archive-profile) over time and in [epidemiological research](https://pubmed.ncbi.nlm.nih.gov/37266937/), with some bias toward higher coverage of mass shootings and incidents involving women and children. Details within GVA incident records sometimes differ from official sources like police or hospital records; and those discrepancies can become more noticeable or significant in analyses that focus on small populations and/or short periods of time. Assessments have found that GVA data has improved towards greater comprehensiveness over time.
 
 Like other researchers, we have found that overall trends in the GVA are generally consistent with trends in other data sources like the FBI’s National Incident-Based Reporting System and the CDC’s Vital Statistics survey.
 
-Our agreement with GVA and The Trace provided detailed data about all incidents with any child or youth participant. We transformed the incident-level file into a person-level file and most of our analyses report the number and rates of people involved in gun violence. However, because the data we have access to only contains child and youth participants, we relied on publicly available incident-level data from [The Trace's Atlas of American Gun Violence Atlas](https://projects.thetrace.org/gun-violence-map/?chartMode=incidents) to calculate the number and percent of incidents involving adults alone. Because they are based incident-level data, the figures presented for children and youth are not directly comparable to the person-level figures presented in the first three takeaways or in the dashboard. 
+Our agreement with GVA and The Trace provided detailed data about all incidents with any child or youth participant. We transformed the incident-level file into a person-level file and most of our analyses report the number and rates of people involved in gun violence. However, because the data we have access to only contains child and youth participants, we relied on publicly available incident-level data from [The Trace’s Atlas of American Gun Violence](https://projects.thetrace.org/gun-violence-map/?chartMode=incidents) to calculate the number and percent of incidents involving adults alone. Because they are based on incident-level data, the figures presented for children and youth are not directly comparable to the person-level figures presented in the first three takeaways or in the dashboard. 
 
 Ready to see what the data actually shows? Start with the [key takeaways](takeaways.html), or go straight to the [dashboard](dashboard.html) to explore it yourself.
 
@@ -78,6 +79,6 @@ Ready to see what the data actually shows? Start with the [key takeaways](takeaw
 
 <footer class="site-footer">
 <div class="wrap">
-<p>Data: [Gun Violence Archive](https://www.gunviolencearchive.org/){target="_blank" rel="noopener"}. Population estimates: CDC SEER.</p>
+<p>This website was published by Empact Solutions in collaboration with and funding from The Annie E. Casey Foundation. Thank you to The Gun Violence Archive for collecting this data and [The Trace](https://projects.thetrace.org/gun-violence-map/) for making it available to us.</p>
 </div>
 </footer>
