@@ -1,5 +1,5 @@
 ---
-title: "Youth Gun Violence Isn't \"Out of Control\" — A Data-Driven Look"
+title: "Insights into Youth Violence from Data from the Gun Violence Archive"
 output:
   html_document:
     theme: null
@@ -37,7 +37,7 @@ cat(nav_html("home"))
 <header class="site-header">
 <div class="wrap">
 <p class="kicker">Data brief</p>
-<h1>Youth Gun Violence Isn't "Out of Control." Here's What the Data Actually Show.</h1>
+<h1>Insights into Youth Violence from Data from the Gun Violence Archive</h1>
 <p class="byline"></p>
 </div>
 </header>
