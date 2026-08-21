@@ -19,8 +19,8 @@ v <- format(Sys.time(), "%Y%m%d%H%M%OS3", tz = "UTC")
 v <- gsub("[^0-9]", "", v)
 
 writeLines(sprintf(
-  '<meta name="description" content="Where this site\'s data comes from, how the Gun Violence Archive defines victims and perpetrators, and what the data can and cannot tell you." />\n<link rel="stylesheet" href="css/style.css?v=%s" />',
-  v
+  '<meta name="description" content="Where this site\'s data comes from, how the Gun Violence Archive defines victims and perpetrators, and what the data can and cannot tell you." />\n<link rel="stylesheet" href="css/style.css?v=%s" />\n%s',
+  v, analytics_html()
 ), "_head_about.html")
 
 # No charts on this page — no chart JS needed.
