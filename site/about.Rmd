@@ -83,6 +83,6 @@ Ready to see what the data actually shows? Start with the [key takeaways](takeaw
 
 <footer class="site-footer">
 <div class="wrap">
-<p>This website was published by Empact Solutions in collaboration with and funding from The Annie E. Casey Foundation. Thank you to The Gun Violence Archive for collecting this data and [The Trace](https://projects.thetrace.org/gun-violence-map/) for making it available to us.</p>
+<p>This website was published by Empact Solutions in collaboration with and funding from The Annie E. Casey Foundation. Thank you to The Gun Violence Archive for collecting this data. Thank you to [The Trace](https://projects.thetrace.org/gun-violence-map/) for sharing this data with us. The Trace was not involved in the analysis presented here.</p>
 </div>
 </footer>
