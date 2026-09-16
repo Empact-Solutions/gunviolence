@@ -52,7 +52,9 @@ Unfortunately, that has been harder than it sounds - and harder than it should b
 
 That responsibility falls in a particular way on those of us who work in the youth justice field. We can’t afford to passively tolerate the persistence of misguided, data-free narratives about the young people, families, and communities we serve. And we no longer have to. New sources of data enable us to build data-driven understandings of youth violence. We can see local, regional, and national trends in violence, and identify whether youth are primarily impacted as perpetrators or as victims.
 
-The remainder of this site examines data about youth violence shared with us from the Gun Violence Archive by The Trace. You can explore the data in greater detail at [The Trace](https://projects.thetrace.org/gun-violence-map/). As you read and explore this data, we encourage you to think about how you might use it to inform or guide your work.
+The remainder of this site examines data about youth violence collected by the Gun Violence Archive. 
+
+Thank you to The Trace, which shared this data with us and which was not involved in the analysis. You can explore the data in greater detail at [The Trace](https://projects.thetrace.org/gun-violence-map/). As you read and explore this data, we encourage you to think about how you might use it to inform or guide your work.
 
 <section class="link-cards">
 <a class="card" href="takeaways.html">
@@ -77,6 +79,6 @@ The remainder of this site examines data about youth violence shared with us fro
 
 <footer class="site-footer">
 <div class="wrap">
-<p>The analyses presented here are the work of [Tom Woods](https://www.aecf.org/people/tom-woods), [Cyrus O'Brien](https://www.cyrusobrien.com/), and [Jason Melchi](https://empactsolutions.org/our-team/). This website was published by Empact Solutions in collaboration with and funding from The Annie E. Casey Foundation. Thank you to The Gun Violence Archive for collecting this data and [The Trace](https://projects.thetrace.org/gun-violence-map/) for making it available to us.</p>
+<p>The analyses presented here are the work of [Tom Woods](https://www.aecf.org/people/tom-woods), [Cyrus O'Brien](https://www.cyrusobrien.com/), and [Jason Melchi](https://empactsolutions.org/our-team/). This website was published by Empact Solutions in collaboration with and funding from The Annie E. Casey Foundation. Thank you to The Gun Violence Archive for collecting this data. Thank you to The Gun Violence Archive for collecting this data. Thank you to [The Trace](https://projects.thetrace.org/gun-violence-map/) for sharing this data with us. The Trace was not involved in the analysis presented here.</p>
 </div>
 </footer>

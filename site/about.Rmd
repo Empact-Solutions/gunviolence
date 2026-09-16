@@ -41,7 +41,9 @@ cat(nav_html("about"))
 
 The [Gun Violence Archive](https://www.gunviolencearchive.org/){target="_blank" rel="noopener"} (GVA) is an independent, nonprofit research group that has tracked gun violence incidents across the United States in near-real time since 2013. GVA compiles incident records from thousands of sources — police reports, government agencies, and media accounts — and verifies each one before adding it to its database. It’s one of the most complete public records of American gun violence available, and it’s the primary data source behind everything on this site.
 
-The data behind this site was shared with us by [The Trace](https://projects.thetrace.org/gun-violence-map/){target="_blank" rel="noopener"}, a nonprofit newsroom that covers gun violence in America. You can explore the underlying GVA data in more detail on their interactive map.
+The data behind this site was shared with us by [The Trace](https://projects.thetrace.org/gun-violence-map/){target="_blank" rel="noopener"}, a nonprofit newsroom that covers gun violence in America and that has a data sharing agreement with the Gun Violence Archive. You can explore more about gun violence on their [interactive map](https://projects.thetrace.org/gun-violence-map/).
+
+The analysis was conducted by Empact Solutions. Neither The Trace nor the Gun Violence Archive were involved in the analysis. 
 
 ## How we define victims and perpetrators
 
@@ -53,9 +55,11 @@ GVA logs each person touched by a gun incident individually — as a victim, a p
 
 We included data from 2017 through February 2026 - and excluded data prior to 2017 - because assessments of the [completeness and sensitivity](https://pmc.ncbi.nlm.nih.gov/articles/PMC10238941/) of GVA data have found that the archive has improved over time.
 
+We identified some incidents that involved only a person under age 18 possessing a firearm and excluded these incidents from some analyses. We did this to make youth incidents more comparable to incidents involving adults; possession-only incidents appear to be much more likely to be captured by the GVA when they involve youth. We identified an incident as possession-only if it met all of the following criteria: no victims were involved in the incident; the incident contained possession-related flag (e.g., "child with gun", "possession of gun by felon or prohibited person", "non-shooting incident"), and the incident did <u>not</u> contain a flag that indicated any shot fired, any other type of crime, or an accidental shooting (e.g. "shot dead," "shot wounded," "accidental shooting," "burglary," "shots fired", "officer involved shooting").
+
 ## Age brackets
 
-GVA categorizes people under 18 in two groups: children (ages 0–11) and youth (ages 12–17). Some charts on this site show children and youth combined, in which case we say so explicitly.
+The GVA data categorizes people under 18 in two groups: children (ages 0–11) and youth (ages 12–17). Some charts on this site show children and youth combined, in which case we say so explicitly.
 
 ## Rates and population estimates
 
@@ -71,7 +75,7 @@ Researchers have found that GVA is a useful and reliable source for [tracking gu
 
 Like other researchers, we have found that overall trends in the GVA are generally consistent with trends in other data sources like the FBI’s National Incident-Based Reporting System and the CDC’s Vital Statistics survey.
 
-Our agreement with GVA and The Trace provided detailed data about all incidents with any child or youth participant. We transformed the incident-level file into a person-level file and most of our analyses report the number and rates of people involved in gun violence. However, because the data we have access to only contains child and youth participants, we relied on publicly available incident-level data from [The Trace’s Atlas of American Gun Violence](https://projects.thetrace.org/gun-violence-map/?chartMode=incidents) to calculate the number and percent of incidents involving adults alone. Because they are based on incident-level data, the figures presented for children and youth are not directly comparable to the person-level figures presented in the first three takeaways or in the dashboard. 
+The Trace provided us detailed data about all incidents with any child or youth participant. We transformed the incident-level file into a person-level file and most of our analyses report the number and rates of people involved in gun violence. However, because the data we have access to only contains child and youth participants, we relied on publicly available incident-level data from [The Trace’s Atlas of American Gun Violence](https://projects.thetrace.org/gun-violence-map/?chartMode=incidents) to calculate the number and percent of incidents involving adults alone. Because they are based on incident-level data, the figures presented for children and youth are not directly comparable to the person-level figures presented in the first three takeaways or in the dashboard. 
 
 Ready to see what the data actually shows? Start with the [key takeaways](takeaways.html), or go straight to the [dashboard](dashboard.html) to explore it yourself.
 
