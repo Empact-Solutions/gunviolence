@@ -199,7 +199,7 @@
     const periodEnd = national[national.length - 1].month;
     const periodStart = new Date(periodEnd.getFullYear(), periodEnd.getMonth() - 11, 1);
     document.getElementById("dash-bar-caption").textContent =
-      `${title} by state — sorted low to high. 12-month average, ${metricType === "rate" ? "annual rate per 100,000" : "raw monthly count"}, ${formatMonth(periodStart)} to ${formatMonth(periodEnd)}.`;
+      `${title} by state. 12-month average, ${metricType === "rate" ? "annual rate per 100,000" : "raw monthly count"}, ${formatMonth(periodStart)} to ${formatMonth(periodEnd)}.`;
 
     if (window.innerWidth < 800) {
       renderBarChartMobile(containerEl, valuesByState, barColor, nationalAvg, unitLabel);
