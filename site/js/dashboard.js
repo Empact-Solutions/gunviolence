@@ -162,6 +162,282 @@
     document.getElementById("dash-trend").replaceChildren(plot);
   }
 
+  // ---- State abbreviation lookup ----
+  const STATE_ABBR = {
+    "Alabama": "AL", "Alaska": "AK", "Arizona": "AZ", "Arkansas": "AR",
+    "California": "CA", "Colorado": "CO", "Connecticut": "CT", "Delaware": "DE",
+    "District of Columbia": "DC", "Florida": "FL", "Georgia": "GA", "Hawaii": "HI",
+    "Idaho": "ID", "Illinois": "IL", "Indiana": "IN", "Iowa": "IA",
+    "Kansas": "KS", "Kentucky": "KY", "Louisiana": "LA", "Maine": "ME",
+    "Maryland": "MD", "Massachusetts": "MA", "Michigan": "MI", "Minnesota": "MN",
+    "Mississippi": "MS", "Missouri": "MO", "Montana": "MT", "Nebraska": "NE",
+    "Nevada": "NV", "New Hampshire": "NH", "New Jersey": "NJ", "New Mexico": "NM",
+    "New York": "NY", "North Carolina": "NC", "North Dakota": "ND", "Ohio": "OH",
+    "Oklahoma": "OK", "Oregon": "OR", "Pennsylvania": "PA", "Rhode Island": "RI",
+    "South Carolina": "SC", "South Dakota": "SD", "Tennessee": "TN", "Texas": "TX",
+    "Utah": "UT", "Vermont": "VT", "Virginia": "VA", "Washington": "WA",
+    "West Virginia": "WV", "Wisconsin": "WI", "Wyoming": "WY",
+  };
+
+  // ---- Bar chart ----
+  function renderBarChart() {
+    const metricKey = ctl.mapMetric.value;
+    const metricType = ctl.metricType.value;
+    const title = mapTitles[metricKey];
+    const colorScheme = mapColors[metricKey];
+
+    const valuesByState = new Map(
+      stateNamesGeo.map((s) => [s, latestValueForState(byState.get(s), metricKey, metricType)])
+    );
+
+    const barColor = colorScheme[colorScheme.length - 1];
+    const nationalAvg = latestValueForState(byState.get("United States"), metricKey, metricType);
+    const unitLabel = metricType === "rate" ? "annual per 100k" : "people/month";
+    const containerEl = document.getElementById("dash-bar");
+    const totalWidth = containerEl.clientWidth || 880;
+
+    const periodEnd = national[national.length - 1].month;
+    const periodStart = new Date(periodEnd.getFullYear(), periodEnd.getMonth() - 11, 1);
+    document.getElementById("dash-bar-caption").textContent =
+      `${title} by state — sorted low to high. 12-month average, ${metricType === "rate" ? "annual rate per 100,000" : "raw monthly count"}, ${formatMonth(periodStart)} to ${formatMonth(periodEnd)}.`;
+
+    if (window.innerWidth < 800) {
+      renderBarChartMobile(containerEl, valuesByState, barColor, nationalAvg, unitLabel);
+    } else {
+      renderBarChartDesktop(containerEl, totalWidth, valuesByState, barColor, nationalAvg, unitLabel);
+    }
+  }
+
+  function renderBarChartDesktop(containerEl, totalWidth, valuesByState, barColor, nationalAvg, unitLabel) {
+    // Sort ascending so highest values are at the right
+    const sorted = [...valuesByState.entries()]
+      .filter(([, v]) => v != null && !isNaN(v))
+      .sort((a, b) => a[1] - b[1]);
+
+    const margin = { top: 20, right: 20, bottom: 36, left: 52 };
+    const width = totalWidth - margin.left - margin.right;
+    const height = 300 - margin.top - margin.bottom;
+
+    const x = d3.scaleBand()
+      .domain(sorted.map(([s]) => STATE_ABBR[s] ?? s))
+      .range([0, width])
+      .padding(0.15);
+
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(sorted, ([, v]) => v) * 1.08])
+      .nice()
+      .range([height, 0]);
+
+    const wrapper = d3.create("div").style("position", "relative");
+    const svg = wrapper
+      .append("svg")
+      .attr("width", totalWidth)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const tooltip = wrapper
+      .append("div")
+      .style("position", "absolute")
+      .style("pointer-events", "none")
+      .style("background", "white")
+      .style("border", "1px solid #ddd")
+      .style("border-radius", "6px")
+      .style("padding", "6px 10px")
+      .style("font-size", "13px")
+      .style("line-height", "1.5")
+      .style("box-shadow", "0 2px 8px rgba(0,0,0,0.12)")
+      .style("opacity", 0)
+      .style("transition", "opacity 0.15s");
+
+    svg.append("g")
+      .attr("transform", `translate(0,${height})`)
+      .call(d3.axisBottom(x).tickSize(0))
+      .call(g => g.select(".domain").remove())
+      .selectAll("text")
+      .style("font-size", "9px")
+      .style("font-family", "inherit");
+
+    svg.append("g")
+      .call(d3.axisLeft(y).ticks(5).tickFormat(d3.format(".0f")))
+      .call(g => g.select(".domain").remove())
+      .call(g => g.selectAll(".tick line").attr("stroke", "#e5e5e5").attr("x2", width))
+      .selectAll("text")
+      .style("font-size", "10px")
+      .style("font-family", "inherit");
+
+    svg.selectAll("rect.bar")
+      .data(sorted)
+      .join("rect")
+      .attr("class", "bar")
+      .attr("x", ([s]) => x(STATE_ABBR[s] ?? s))
+      .attr("y", ([, v]) => y(v))
+      .attr("width", x.bandwidth())
+      .attr("height", ([, v]) => height - y(v))
+      .attr("fill", barColor)
+      .on("mousemove", function (event, [s, v]) {
+        const [mx, my] = d3.pointer(event, wrapper.node());
+        const barMidX = (x(STATE_ABBR[s] ?? s) ?? 0) + x.bandwidth() / 2;
+        const leftOfCursor = barMidX > width * (2 / 3);
+        tooltip
+          .html(`<strong>${s}</strong><br>${v.toFixed(1)} ${unitLabel}`)
+          .style("opacity", 1)
+          .style("left", leftOfCursor ? `${mx - 12}px` : `${mx + 12}px`)
+          .style("transform", leftOfCursor ? "translateX(-100%)" : "none")
+          .style("top", `${my - 36}px`);
+        d3.select(this).attr("fill", d3.color(barColor).darker(0.5));
+      })
+      .on("mouseleave", function () {
+        tooltip.style("opacity", 0);
+        d3.select(this).attr("fill", barColor);
+      });
+
+    if (nationalAvg != null && !isNaN(nationalAvg)) {
+      const ny = y(nationalAvg);
+      svg.append("line")
+        .attr("x1", 0).attr("x2", width)
+        .attr("y1", ny).attr("y2", ny)
+        .attr("stroke", "#444")
+        .attr("stroke-width", 1.5)
+        .attr("stroke-dasharray", "5,4");
+      svg.append("text")
+        .attr("x", 0)
+        .attr("y", ny - 4)
+        .attr("text-anchor", "start")
+        .attr("font-size", 10)
+        .attr("fill", "#444")
+        .text(`U.S. avg: ${nationalAvg.toFixed(1)}`);
+    }
+
+    containerEl.replaceChildren(wrapper.node());
+  }
+
+  function renderBarChartMobile(containerEl, valuesByState, barColor, nationalAvg, unitLabel) {
+    // Sort descending so highest value is at the top
+    const sorted = [...valuesByState.entries()]
+      .filter(([, v]) => v != null && !isNaN(v))
+      .sort((a, b) => b[1] - a[1]);
+
+    const totalWidth = containerEl.clientWidth || 400;
+    const labelW = 28;
+    const avgLabelH = 28; // space above chart for the "U.S. avg" label
+    const margin = { top: avgLabelH, right: 16, bottom: 24, left: labelW };
+    const width = totalWidth - margin.left - margin.right;
+    const barH = 7;
+    const barPad = 3;
+    const innerHeight = sorted.length * (barH + barPad);
+    const totalHeight = innerHeight + margin.top + margin.bottom;
+
+    const x = d3.scaleLinear()
+      .domain([0, d3.max(sorted, ([, v]) => v) * 1.08])
+      .nice()
+      .range([0, width]);
+
+    const y = d3.scaleBand()
+      .domain(sorted.map(([s]) => STATE_ABBR[s] ?? s))
+      .range([0, innerHeight])
+      .padding(0.25);
+
+    const wrapper = d3.create("div").style("position", "relative");
+    const svg = wrapper
+      .append("svg")
+      .attr("width", totalWidth)
+      .attr("height", totalHeight)
+      .append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const tooltip = wrapper
+      .append("div")
+      .style("position", "absolute")
+      .style("pointer-events", "none")
+      .style("background", "white")
+      .style("border", "1px solid #ddd")
+      .style("border-radius", "6px")
+      .style("padding", "4px 8px")
+      .style("font-size", "12px")
+      .style("line-height", "1.5")
+      .style("box-shadow", "0 2px 8px rgba(0,0,0,0.12)")
+      .style("opacity", 0)
+      .style("transition", "opacity 0.15s");
+
+    // Y axis: state abbreviations
+    svg.append("g")
+      .call(d3.axisLeft(y).tickSize(0))
+      .call(g => g.select(".domain").remove())
+      .selectAll("text")
+      .style("font-size", "8px")
+      .style("font-family", "inherit");
+
+    // X axis: values at bottom
+    svg.append("g")
+      .attr("transform", `translate(0,${innerHeight})`)
+      .call(d3.axisBottom(x).ticks(4).tickFormat(d3.format(".0f")))
+      .call(g => g.select(".domain").remove())
+      .call(g => g.selectAll(".tick line").attr("stroke", "#e5e5e5").attr("y1", -innerHeight).attr("y2", 0))
+      .selectAll("text")
+      .style("font-size", "9px")
+      .style("font-family", "inherit");
+
+    // Bars
+    svg.selectAll("rect.bar")
+      .data(sorted)
+      .join("rect")
+      .attr("class", "bar")
+      .attr("x", 0)
+      .attr("y", ([s]) => y(STATE_ABBR[s] ?? s))
+      .attr("width", ([, v]) => Math.max(0, x(v)))
+      .attr("height", y.bandwidth())
+      .attr("fill", barColor)
+      .on("mousemove", function (event, [s, v]) {
+        const [mx, my] = d3.pointer(event, wrapper.node());
+        tooltip
+          .html(`<strong>${s}</strong><br>${v.toFixed(1)} ${unitLabel}`)
+          .style("opacity", 1)
+          .style("left", `${Math.min(mx + 10, totalWidth - 120)}px`)
+          .style("top", `${my - 36}px`);
+        d3.select(this).attr("fill", d3.color(barColor).darker(0.5));
+      })
+      .on("mouseleave", function () {
+        tooltip.style("opacity", 0);
+        d3.select(this).attr("fill", barColor);
+      });
+
+    // National average: vertical dotted line + label above with connector
+    if (nationalAvg != null && !isNaN(nationalAvg)) {
+      const nx = x(nationalAvg);
+      // Vertical dotted reference line
+      svg.append("line")
+        .attr("x1", nx).attr("x2", nx)
+        .attr("y1", 0).attr("y2", innerHeight)
+        .attr("stroke", "#444")
+        .attr("stroke-width", 1.5)
+        .attr("stroke-dasharray", "5,4");
+      // Short connector from top of line up into the margin
+      const connectorTop = -avgLabelH + 10;
+      svg.append("line")
+        .attr("x1", nx).attr("x2", nx)
+        .attr("y1", 0).attr("y2", connectorTop + 2)
+        .attr("stroke", "#444")
+        .attr("stroke-width", 1);
+      // Horizontal line from label text end to connector
+      const labelText = `U.S. avg: ${nationalAvg.toFixed(1)}`;
+      // Anchor text to the left of the connector when it's in the right half, else to the right
+      const anchorRight = nx > width * 0.55;
+      const textX = anchorRight ? nx - 4 : nx + 4;
+      const textAnchor = anchorRight ? "end" : "start";
+      svg.append("text")
+        .attr("x", textX)
+        .attr("y", connectorTop)
+        .attr("text-anchor", textAnchor)
+        .attr("dominant-baseline", "hanging")
+        .attr("font-size", 10)
+        .attr("fill", "#444")
+        .text(labelText);
+    }
+
+    containerEl.replaceChildren(wrapper.node());
+  }
+
   // ---- Map ----
   const topology = us;
   const geoFeatures = topojson.feature(topology, topology.objects.states).features;
@@ -352,7 +628,7 @@
   [ctl.population, ctl.possession, ctl.metricTypeTrend, ctl.smoothing, ctl.state, ctl.compare].forEach((el) =>
     el.addEventListener("change", renderTrend)
   );
-  [ctl.mapMetric, ctl.metricType].forEach((el) => el.addEventListener("change", renderMap));
+  [ctl.mapMetric, ctl.metricType].forEach((el) => el.addEventListener("change", () => { renderMap(); renderBarChart(); }));
 
   ctl.compareClear.addEventListener("click", () => {
     [...ctl.compare.options].forEach((o) => (o.selected = false));
@@ -362,8 +638,10 @@
   updatePossessionEnabled();
   renderTrend();
   renderMap();
+  renderBarChart();
 
   window.addEventListener("resize", () => {
     renderTrend();
+    renderBarChart();
   });
 })();

@@ -69,6 +69,11 @@ cat(nav_html("dashboard"))
 <div id="dash-map"></div>
 <figcaption id="dash-map-caption"></figcaption>
 </figure>
+
+<figure class="chart">
+<div id="dash-bar"></div>
+<figcaption id="dash-bar-caption"></figcaption>
+</figure>
 <br>
 
 <div class="dashboard-controls">
