@@ -270,4 +270,15 @@ figure.chart figcaption {
 @media (max-width: 640px) {
   .site-header h1 { font-size: 1.6rem; }
   .site-header { padding: 40px 0 24px; }
+
+  .dashboard-controls {
+    flex-direction: column;
+  }
+  .control {
+    min-width: 0;
+    width: 100%;
+  }
+  .control select {
+    width: 100%;
+  }
 }
