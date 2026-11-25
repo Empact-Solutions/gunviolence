@@ -16,8 +16,8 @@
 
 <script src="dashboard_files/header-attrs-2.30/header-attrs.js"></script>
 <meta name="description" content="Explore Gun Violence Archive youth and child gun violence data by state, age group, and rate." />
-<link rel="stylesheet" href="css/style.css?v=20261125200654051" />
-<link rel="stylesheet" href="css/dashboard.css?v=20261125200654051" />
+<link rel="stylesheet" href="css/style.css?v=20261125201210235" />
+<link rel="stylesheet" href="css/dashboard.css?v=20261125201210235" />
 <script>if (window.self !== window.top || /[?&]embed=1/.test(location.search)) document.documentElement.classList.add("is-embedded");</script>
 <!-- Privacy-friendly analytics by Plausible -->
 <script async src="https://plausible.io/js/pa-cZFtK8lVpmjr17HsGCwx_.js"></script>
@@ -64,52 +64,29 @@
 </nav>
 <header class="site-header page-header">
 <div class="wrap">
-<h1>
-Child and Youth Involvement in Gun Violence
-</h1>
-<p class="page-subtitle">
-Youth and Gun Violence Dashboard
-</p>
+<h1>Child and Youth Involvement in Gun Violence</h1>
+<p class="page-subtitle">Youth and Gun Violence Dashboard</p>
 </div>
 </header>
 <main class="dashboard-section">
 <div class="wrap">
-<p class="dashboard-lede">
-Explore trends in any jurisdiction.
-</p>
+<p class="dashboard-lede">Explore trends in any jurisdiction.</p>
 <div class="disclosures">
 <details class="disclosure">
-<summary>
-How this dashboard works
-</summary>
-<p>
-This dashboard allows you to switch between counts and rates, choose
-whether to view raw monthly data or a 12-month rolling average, and
-explore trends for youth (age 12-17), children (age 0-11), or all
-children under age 18. This dashboard also allows you to include or
-exclude incidents that involved only a person under age 18 possessing a
-firearm. All figures come from Gun Violence Archive. Rates are an annual
-rate per 100,000 residents in the relevant age group, using CDC SEER
-single-age population estimates. Rolling averages, where selected, are
-calculated as a trailing 12-month mean.
-</p>
+<summary>How this dashboard works</summary>
+<p>This dashboard allows you to switch between counts and rates, choose whether to view raw monthly data or a 12-month rolling average, and explore trends for youth (age 12-17), children (age 0-11), or all children under age 18. This dashboard also allows you to include or exclude incidents that involved only a person under age 18 possessing a firearm. All figures come from Gun Violence Archive. Rates are an annual rate per 100,000 residents in the relevant age group, using CDC SEER single-age population estimates. Rolling averages, where selected, are calculated as a trailing 12-month mean.</p>
 </details>
 <details class="disclosure data-note">
-<summary>
-A note about the data
-</summary>
-<p>
-The Gun Violence Archive is a leading source for data about incidents
+<summary>A note about the data</summary>
+<p>The Gun Violence Archive is a leading source for data about incidents
 involving firearms in the U.S. Professional staff at GVA sweep law
 enforcement and media sources on a daily basis and record the incident
 along with up to 120 different variables in their database. As more
 information about an incident becomes available, GVA staff update
 incident reports and add additional sources. Incidents in the GVA data
 are highly verifiable: 100% of incidents in the child extract have a
-source listed, and 56% have multiple sources listed.
-</p>
-<p>
-Independent assessments of GVA data have found them to closely track
+source listed, and 56% have multiple sources listed.</p>
+<p>Independent assessments of GVA data have found them to closely track
 other sources of information about firearm incidents. An evaluation of
 GVA data in four cities published in <a
 href="https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2805509">JAMA
@@ -118,108 +95,75 @@ incidents across six years and that the archive improved over time. By
 2020, the GVA database contained 92% of incidents recorded in data
 collected by police. Despite the already-small rate of uncaptured
 incidents, GVA is significantly more likely to capture an incident that
-involves participants under age 18.
-</p>
-<p>
-The GVA is intended to capture all types of incidents involving
+involves participants under age 18.</p>
+<p>The GVA is intended to capture all types of incidents involving
 firearms, not merely incidents that involve criminal behavior. It
 includes, for instance, incidents involving accidental shootings, gun
-possession, and suicide.
-</p>
-<p>
-Analyses of GVA data yield similar but not identical results to analyses
-of other sources of data. Trends and jurisdictional profiles <a
+possession, and suicide.</p>
+<p>Analyses of GVA data yield similar but not identical results to
+analyses of other sources of data. Trends and jurisdictional profiles <a
 href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7587299/">broadly
 align</a> with data from the CDC’s Vital Statistics Survey and the FBI’s
 National Incident-Based Reporting System (NIBRS). One key cause of
 divergences between GVA data and governmental sources is that
 governmental sources such as NIBRS use sampling techniques and
 extrapolation to account for missing data whereas the GVA contains only
-verified incidents.
-</p>
-<p>
-The analyses presented here exclude incidents that we were able to
-identify as consisting only of a single youth possessing a firearm. For
-more details, see the <a href="about.html">About page</a>.
-</p>
-<p class="bottom-line">
-<strong>Bottom line:</strong> No source captures every firearm incident
-in the United States, and GVA, police, and hospital data all diverge to
-some degree wherever they have been compared. For narrow analyses — a
-specific city or short time period — local police or hospital records
-may offer more precision. But for tracking national patterns over time,
-GVA is the most comprehensive, transparent, and consistently sourced
-public option, and one that has grown more reliable each year.
-</p>
+verified incidents.</p>
+<p>The analyses presented here exclude incidents that we were able to identify as
+consisting only of a single youth possessing a firearm. For more details, see the
+<a href="about.html">About page</a>.</p>
+<p class="bottom-line"><strong>Bottom line:</strong> No source captures every firearm
+incident in the United States, and GVA, police, and hospital data all
+diverge to some degree wherever they have been compared. For narrow
+analyses — a specific city or short time period — local police or
+hospital records may offer more precision. But for tracking national
+patterns over time, GVA is the most comprehensive, transparent, and
+consistently sourced public option, and one that has grown more reliable
+each year.</p>
 </details>
 </div>
 <div class="view-bar">
 <div class="view-tabs" role="tablist" aria-label="Dashboard views">
-<button type="button" role="tab" id="tab-map" aria-controls="panel-map" aria-selected="true">
-Map
-</button>
-<button type="button" role="tab" id="tab-trends" aria-controls="panel-trends" aria-selected="false" tabindex="-1">
-Trends
-</button>
-<button type="button" role="tab" id="tab-compare" aria-controls="panel-compare" aria-selected="false" tabindex="-1">
-Compare states
-</button>
-<button type="button" role="tab" id="tab-highlights" aria-controls="panel-highlights" aria-selected="false" tabindex="-1">
-State highlights
-</button>
-<button type="button" role="tab" id="tab-county-map" aria-controls="panel-county-map" aria-selected="false" tabindex="-1">
-County map
-</button>
-<button type="button" role="tab" id="tab-county" aria-controls="panel-county" aria-selected="false" tabindex="-1">
-County spotlight
-</button>
+<button type="button" role="tab" id="tab-map" aria-controls="panel-map" aria-selected="true">Map</button>
+<button type="button" role="tab" id="tab-trends" aria-controls="panel-trends" aria-selected="false" tabindex="-1">Trends</button>
+<button type="button" role="tab" id="tab-compare" aria-controls="panel-compare" aria-selected="false" tabindex="-1">Compare states</button>
+<button type="button" role="tab" id="tab-highlights" aria-controls="panel-highlights" aria-selected="false" tabindex="-1">State highlights</button>
+<button type="button" role="tab" id="tab-county-map" aria-controls="panel-county-map" aria-selected="false" tabindex="-1">County map</button>
+<button type="button" role="tab" id="tab-county" aria-controls="panel-county" aria-selected="false" tabindex="-1">County spotlight</button>
 </div>
 <fieldset class="control">
 <legend>View</legend>
 <div class="seg-options is-pair">
-<p><label><input type="radio" name="metric-type" value="rate" checked /><span>Rate
-per 100,000</span></label>
-<label><input type="radio" name="metric-type" value="count" /><span>Raw
-counts</span></label></p>
+<label><input type="radio" name="metric-type" value="rate" checked /><span>Rate per 100,000</span></label>
+<label><input type="radio" name="metric-type" value="count" /><span>Raw counts</span></label>
 </div>
 </fieldset>
 </div>
 <section class="dash-block" id="panel-map" role="tabpanel" aria-labelledby="tab-map">
-<div id="geo-controls" class="filter-panel filter-grid">
+<div class="filter-panel filter-grid" id="geo-controls">
 <div class="control">
-<p><label for="ctl-map-metric">Map metric</label>
-<select id="ctl-map-metric"> <option value="youth_victim">Youth (12–17)
-victimization</option> <option value="youth_perp_minus_possession">Youth
-(12–17) offenses</option> <option value="child_victim">Children (0–11)
-victimization</option> </select></p>
+<label for="ctl-map-metric">Map metric</label>
+<select id="ctl-map-metric">
+<option value="youth_victim">Youth (12–17) victimization</option>
+<option value="youth_perp_minus_possession">Youth (12–17) offenses</option>
+<option value="child_victim">Children (0–11) victimization</option>
+</select>
 </div>
 <fieldset class="control">
 <legend>Show as</legend>
 <div class="seg-options is-pair">
-<p><label><input type="radio" name="geo-view" value="map" checked /><span>Map</span></label>
-<label><input type="radio" name="geo-view" value="list" /><span>Ranked
-list</span></label></p>
+<label><input type="radio" name="geo-view" value="map" checked /><span>Map</span></label>
+<label><input type="radio" name="geo-view" value="list" /><span>Ranked list</span></label>
 </div>
 </fieldset>
-<p class="map-hint">
-Select a state to see its trend.
-</p>
+<p class="map-hint">Select a state to see its trend.</p>
 </div>
 <figure class="chart">
-<p class="chart-title" id="geo-title">
-</p>
-<p class="chart-sub" id="geo-sub">
-</p>
-<div id="dash-map">
-<p class="chart-status">
-Loading the map…
-</p>
-</div>
-<div id="dash-bar">
-
-</div>
-<figcaption id="geo-note" hidden>
-</figcaption>
+<p class="chart-title" id="geo-title"></p>
+<p class="chart-sub" id="geo-sub"></p>
+<div id="dash-map"><p class="chart-status">Loading the map…</p></div>
+<div id="dash-bar"></div>
+<figcaption id="geo-note" hidden></figcaption>
 </figure>
 </section>
 <section class="dash-block" id="panel-trends" role="tabpanel" aria-labelledby="tab-trends" hidden>
@@ -227,205 +171,140 @@ Loading the map…
 <div id="trend-area">
 <div class="filter-panel filter-grid">
 <div class="control">
-<p><label for="ctl-state">State</label>
-<select id="ctl-state"></select></p>
+<label for="ctl-state">State</label>
+<select id="ctl-state"></select>
 </div>
 <div class="control comparison-control">
 <label for="ctl-compare">Compare up to 3 more states</label>
 <div class="compare-row">
 <select id="ctl-compare"></select>
-<ul class="chips" id="compare-chips">
-</ul>
-<button type="button" class="text-button" id="ctl-compare-clear" hidden>
-Clear comparisons
-</button>
+<ul class="chips" id="compare-chips"></ul>
+<button type="button" class="text-button" id="ctl-compare-clear" hidden>Clear comparisons</button>
 </div>
-<p class="hint">
-“United States” is listed first in both dropdowns if you want the
-national trend.
-</p>
+<p class="hint">"United States" is listed first in both dropdowns if you want the national trend.</p>
 </div>
 <button type="button" class="filters-toggle" id="filters-toggle" aria-expanded="false">
-<span class="filters-toggle-label">Filters</span> <span
-id="filters-summary" class="filters-summary"></span>
+<span class="filters-toggle-label">Filters</span>
+<span class="filters-summary" id="filters-summary"></span>
 </button>
-<div class="filter-rule">
-
+<div class="filter-rule"></div>
+<div class="control secondary">
+<label for="ctl-population">Age range</label>
+<select id="ctl-population">
+<option value="youth">Youth (12–17)</option>
+<option value="child">Children (0–11)</option>
+<option value="">Children and youth (0–17)</option>
+</select>
 </div>
 <div class="control secondary">
-<p><label for="ctl-population">Age range</label>
-<select id="ctl-population"> <option value="youth">Youth
-(12–17)</option> <option value="child">Children (0–11)</option>
-<option value="">Children and youth (0–17)</option> </select></p>
-</div>
-<div class="control secondary">
-<p><label for="ctl-status">Show</label> <select id="ctl-status">
+<label for="ctl-status">Show</label>
+<select id="ctl-status">
 <option value="both">Victims and perpetrators</option>
 <option value="victim">Victims only</option>
-<option value="perp">Perpetrators only</option> </select></p>
+<option value="perp">Perpetrators only</option>
+</select>
 </div>
 <div class="control toggle-control secondary">
-<p><label class="toggle">
-<input type="checkbox" id="ctl-smoothing" checked /> <span>12-month
-rolling average or sum</span> </label></p>
+<label class="toggle">
+<input type="checkbox" id="ctl-smoothing" checked />
+<span>12-month rolling average or sum</span>
+</label>
 </div>
 </div>
 <figure class="chart">
-<p class="chart-title" id="dash-trend-title">
-</p>
-<ul class="legend" id="dash-trend-legend">
-</ul>
-<div id="dash-trend">
-
-</div>
-<p class="chart-note" id="dash-trend-note" hidden>
-</p>
+<p class="chart-title" id="dash-trend-title"></p>
+<ul class="legend" id="dash-trend-legend"></ul>
+<div id="dash-trend"></div>
+<p class="chart-note" id="dash-trend-note" hidden></p>
 </figure>
 </div>
 </div>
 </section>
 <section class="dash-block" id="panel-compare" role="tabpanel" aria-labelledby="tab-compare" hidden>
-<div id="compare-slot">
-
-</div>
+<div id="compare-slot"></div>
 </section>
 <section class="dash-block" id="panel-highlights" role="tabpanel" aria-labelledby="tab-highlights" hidden>
-<div id="highlights-controls" class="filter-panel filter-grid">
+<div class="filter-panel filter-grid" id="highlights-controls">
 <div class="control">
-<p><label for="ctl-hl-state">State</label>
-<select id="ctl-hl-state"></select></p>
+<label for="ctl-hl-state">State</label>
+<select id="ctl-hl-state"></select>
 </div>
 </div>
-<div id="hl-incidents" class="hl-section">
-<h2 class="hl-heading" id="hl-incidents-heading">
-<ol style="list-style-type: decimal">
-<li>Most incidents do not involve youth.
-</h2>
-<ul class="hl-stats is-three" id="hl-incident-stats">
-</ul>
-<p class="hl-note" id="hl-incident-note" hidden>
-</p>
+<div class="hl-section" id="hl-incidents">
+<h2 class="hl-heading" id="hl-incidents-heading">1. Most incidents do not involve youth.</h2>
+<ul class="hl-stats is-three" id="hl-incident-stats"></ul>
+<p class="hl-note" id="hl-incident-note" hidden></p>
 </div>
 <div class="hl-section">
-<h2 class="hl-heading" id="hl-ratio-heading">
-2. Youth and children are more involved in gun violence as victims than
-as perpetrators.
-</h2>
-<p class="hl-statement" id="hl-ratio-text">
-</p>
+<h2 class="hl-heading" id="hl-ratio-heading">2. Youth and children are more involved in gun violence as victims than as perpetrators.</h2>
+<p class="hl-statement" id="hl-ratio-text"></p>
 </div>
 <div class="hl-section">
-<h2 class="hl-heading">
-3. Youth gun violence rose during the pandemic but has since receded.
-</h2>
+<h2 class="hl-heading">3. Youth gun violence rose during the pandemic but has since receded.</h2>
 <figure class="chart">
-<p class="chart-title" id="hl-trend-title">
-</p>
-<p class="chart-sub" id="hl-trend-sub">
-</p>
-<ul class="legend" id="hl-trend-legend" hidden>
-</ul>
-<div id="hl-trend" class="hl-plot">
-
-</div>
-<figcaption id="hl-trend-caption">
-Each point is the sum for that month and the 11 months before it.
-</figcaption>
+<p class="chart-title" id="hl-trend-title"></p>
+<p class="chart-sub" id="hl-trend-sub"></p>
+<ul class="legend" id="hl-trend-legend" hidden></ul>
+<div class="hl-plot" id="hl-trend"></div>
+<figcaption id="hl-trend-caption">Each point is the sum for that month and the 11 months before it.</figcaption>
 </figure>
 </div>
 <div class="hl-section">
-<h2 class="hl-heading">
-4. Youth involvement in gun violence has changed since the pandemic-era
-peak.
-</h2>
-<ul class="hl-stats" id="hl-peak">
-</ul>
-<p class="hl-note" id="hl-peak-note">
-</p>
+<h2 class="hl-heading">4. Youth involvement in gun violence has changed since the pandemic-era peak.</h2>
+<ul class="hl-stats" id="hl-peak"></ul>
+<p class="hl-note" id="hl-peak-note"></p>
 </div>
 </section>
 <section class="dash-block" id="panel-county-map" role="tabpanel" aria-labelledby="tab-county-map" hidden>
-<div id="county-map-controls" class="filter-panel filter-grid">
-<div class="control">
-<label for="ctl-cmap-metric">Map metric</label>
-<select id="ctl-cmap-metric"> <option value="yvr">Youth (12–17) victim
-rate</option> <option value="ypr">Youth (12–17) offense rate</option>
-</select>
+<div class="filter-panel filter-grid" id="county-map-controls">
+  <div class="control">
+    <label for="ctl-cmap-metric">Map metric</label>
+    <select id="ctl-cmap-metric">
+      <option value="yvr">Youth (12–17) victim rate</option>
+      <option value="ypr">Youth (12–17) offense rate</option>
+    </select>
+  </div>
 </div>
-</div>
-<div id="county-map-loading" hidden="">
-<p class="chart-status">
-Loading county data…
-</p>
-</div>
+<div id="county-map-loading" hidden><p class="chart-status">Loading county data…</p></div>
 <div id="county-map-wrap">
-<div class="map-legend">
-<div id="county-map-legend-scale">
-
-</div>
-</div>
-<div id="county-map-frame" class="map-frame">
-<div id="county-map-tip" class="tip" role="status">
-
-</div>
-</div>
-<p class="county-map-hint">
-Click any county to see its full profile.
-</p>
+  <div class="map-legend"><div id="county-map-legend-scale"></div></div>
+  <div class="map-frame" id="county-map-frame">
+    <div class="tip" role="status" id="county-map-tip"></div>
+  </div>
+  <p class="county-map-hint">Click any county to see its full profile.</p>
 </div>
 </section>
 <section class="dash-block" id="panel-county" role="tabpanel" aria-labelledby="tab-county" hidden>
-<div id="county-controls" class="filter-panel filter-grid">
-<div class="control county-search-control">
-<label for="ctl-county-search">Search counties</label>
-<div class="county-search-wrap">
-<input type="text" id="ctl-county-search" autocomplete="off" spellcheck="false" placeholder="e.g. Cook County, Illinois" />
-<ul class="county-suggestions" id="county-suggestions" role="listbox" hidden>
-</ul>
+<div class="filter-panel filter-grid" id="county-controls">
+  <div class="control county-search-control">
+    <label for="ctl-county-search">Search counties</label>
+    <div class="county-search-wrap">
+      <input type="text" id="ctl-county-search" autocomplete="off" spellcheck="false" placeholder="e.g. Cook County, Illinois" />
+      <ul class="county-suggestions" id="county-suggestions" role="listbox" hidden></ul>
+    </div>
+  </div>
 </div>
+<div id="county-loading" hidden><p class="chart-status">Loading county data…</p></div>
+<div id="county-spotlight" hidden>
+  <div class="county-header">
+    <h2 class="county-name" id="county-name-heading"></h2>
+    <p class="county-period">January 2017 – February 2026 (9+ years)</p>
+  </div>
+  <div class="county-stats" id="county-stats"></div>
+  <figure class="chart">
+    <p class="chart-title" id="county-chart-title"></p>
+    <ul class="legend" id="county-legend"></ul>
+    <div id="county-chart"></div>
+    <p class="chart-note" id="county-chart-note" hidden></p>
+  </figure>
+  <div class="county-compare" id="county-compare"></div>
 </div>
-</div>
-<div id="county-loading" hidden="">
-<p class="chart-status">
-Loading county data…
-</p>
-</div>
-<div id="county-spotlight" hidden="">
-<div class="county-header">
-<h2 class="county-name" id="county-name-heading">
-</h2>
-<p class="county-period">
-January 2017 – February 2026 (9+ years)
-</p>
-</div>
-<div id="county-stats" class="county-stats">
-
-</div>
-<figure class="chart">
-<p class="chart-title" id="county-chart-title">
-</p>
-<ul class="legend" id="county-legend">
-</ul>
-<div id="county-chart">
-
-</div>
-<p class="chart-note" id="county-chart-note" hidden>
-</p>
-</figure>
-<div id="county-compare" class="county-compare">
-
-</div>
-</div>
-<div id="county-empty" hidden="">
-<p class="chart-status">
-No incidents recorded for this county in the Gun Violence Archive during
-this period.
-</p>
+<div id="county-empty" hidden>
+  <p class="chart-status">No incidents recorded for this county in the Gun Violence Archive during this period.</p>
 </div>
 </section>
 </div>
-</main></li>
-</ol>
+</main>
 <footer class="site-footer">
 <div class="wrap">
 <p>
@@ -438,14 +317,12 @@ presented here.
 </p>
 </div>
 </footer>
-</div>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6.16/dist/plot.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
-<script src="js/utils.js?v=20261125200654051"></script>
-<script src="js/dashboard.js?v=20261125200654051"></script>
+<script src="js/utils.js?v=20261125201210235"></script>
+<script src="js/dashboard.js?v=20261125201210235"></script>
 
 
 <!-- code folding -->
