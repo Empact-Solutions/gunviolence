@@ -338,19 +338,19 @@
     let heading;
     if (!perps) {
       heading = "2. Youth and children are more involved in gun violence as victims than as perpetrators.";
-      html = `Over the past ten years, ${fmtInt(victims)} youth in ${place} were victims of gun violence and none were recorded as perpetrators.`;
+      html = `From January 2017 through February 2026, ${fmtInt(victims)} youth in ${place} were victims of gun violence and none were recorded as perpetrators.`;
     } else {
       const ratio = (victims / perps).toFixed(1);
       if (ratio === "1.0") {
         heading = "2. Youth and children are involved in gun violence as both victims and perpetrators.";
-        html = `Over the past ten years, about as many youth in ${place} were victims of gun violence as were perpetrators.`;
+        html = `From January 2017 through February 2026, about as many youth in ${place} were victims of gun violence as were perpetrators.`;
       } else if (parseFloat(ratio) < 1.0) {
         heading = "2. Youth and children are more involved in gun violence as perpetrators than as victims.";
         const inverseRatio = (perps / victims).toFixed(1);
-        html = `Over the past ten years, <strong class="hl-ratio-figure">${inverseRatio}×</strong> as many youth in ${place} were perpetrators of gun violence as were victims.`;
+        html = `From January 2017 through February 2026, <strong class="hl-ratio-figure">${inverseRatio}×</strong> as many youth in ${place} were perpetrators of gun violence as were victims.`;
       } else {
         heading = "2. Youth and children are more involved in gun violence as victims than as perpetrators.";
-        html = `Over the past ten years, <strong class="hl-ratio-figure">${ratio}×</strong> as many youth in ${place} were victims of gun violence as were perpetrators.`;
+        html = `From January 2017 through February 2026, <strong class="hl-ratio-figure">${ratio}×</strong> as many youth in ${place} were victims of gun violence as were perpetrators.`;
       }
     }
     $("hl-ratio-heading").textContent = heading;
@@ -661,6 +661,8 @@
     });
     $(comparingOpen() ? "compare-slot" : "trends-slot").append($("trend-area"));
     if (focus) tab.focus();
+    if (tab.id !== "tab-county") setRateDisabled(false);
+    else if (countyData && currentCountyGeoid) renderCountySpotlight(currentCountyGeoid);
     renderTrend();
     renderHighlights();
   }
@@ -1022,6 +1024,8 @@
 
   let currentCountyGeoid = null;
 
+  let rateForcedOff = false;
+
   function setRateDisabled(disabled) {
     const rateRadio = document.querySelector('input[name="metric-type"][value="rate"]');
     if (!rateRadio) return;
@@ -1030,13 +1034,12 @@
     // radio group stays in a consistent state.
     if (disabled && rateRadio.checked) {
       document.querySelector('input[name="metric-type"][value="count"]').checked = true;
+      rateForcedOff = true;
+    } else if (!disabled && rateForcedOff) {
+      rateRadio.checked = true;
+      rateForcedOff = false;
     }
   }
-
-  // Re-enable the rate toggle whenever the user leaves the county spotlight.
-  tabs.forEach((tab) => {
-    if (tab.id !== "tab-county") tab.addEventListener("click", () => setRateDisabled(false));
-  });
 
   function renderCountySpotlight(geoid) {
     currentCountyGeoid = geoid;
@@ -1079,12 +1082,12 @@
       <div class="county-stat">
         <span class="county-stat-value">${annYvr}</span>
         <span class="county-stat-label">Victim rate per 100k / yr</span>
-        <span class="county-stat-sub">10-year annualized average</span>
+        <span class="county-stat-sub">(annual avg, Jan 2017 – Feb 2026)</span>
       </div>
       <div class="county-stat">
         <span class="county-stat-value">${annYpr}</span>
         <span class="county-stat-label">Offense rate per 100k / yr</span>
-        <span class="county-stat-sub">10-year annualized average</span>
+        <span class="county-stat-sub">(annual avg, Jan 2017 – Feb 2026)</span>
       </div>`;
 
     if (rank && stateSum) {
@@ -1170,13 +1173,14 @@
 
   // ---- County map ----
   let countyMapBuilt = false;
+  let redrawCountyMap = null;
 
   function openCountySpotlight(geoid) {
     ensureCountyData().then(() => {
       const info = countyData.names[geoid];
       if (!info) return;
       $("ctl-county-search").value = `${fmtCounty(info.county, geoid)}, ${info.state}`;
-      renderCountySpotlight(geoid);
+      currentCountyGeoid = geoid;
       showView($("tab-county"));
       pushState();
       const bar = document.querySelector(".view-bar");
@@ -1257,25 +1261,31 @@
 
     function getMetric() { return $("ctl-cmap-metric").value; }
 
+    // The View switch picks annualized rates or whole-period totals.
+    function countyValue(geoid) {
+      const s = cmapSummary[geoid];
+      if (!s) return null;
+      const field = getMetric();
+      if (radio("metric-type") === "count") return s[field === "yvr" ? "yv" : "yp"];
+      return s[field] * 12;
+    }
+
     function renderCountyMap() {
       const field = getMetric(); // "yvr" or "ypr"
       const color = field === "yvr"
         ? sequentialRamp(PALETTE.victim, 9)
         : sequentialRamp(PALETTE.perp, 9);
 
-      // Build rate array for quantile scale (annualized).
+      const isCount = radio("metric-type") === "count";
+      const fmt = (v) => (isCount ? Math.round(v).toLocaleString("en-US") : v.toFixed(1));
       const vals = cFeatures
-        .map((f) => {
-          const s = cmapSummary[String(f.id).padStart(5, "0")];
-          return s ? s[field] * 12 : null;
-        })
+        .map((f) => countyValue(String(f.id).padStart(5, "0")))
         .filter((v) => v != null && v > 0);
 
       const scale = d3.scaleQuantile().domain(vals).range(color);
 
       countyPaths.attr("fill", (f) => {
-        const s = cmapSummary[String(f.id).padStart(5, "0")];
-        const v = s ? s[field] * 12 : null;
+        const v = countyValue(String(f.id).padStart(5, "0"));
         return v != null && v > 0 ? scale(v) : "#e8e8e8";
       });
 
@@ -1285,26 +1295,34 @@
       const swatches = [...color].map((c, i) => {
         const lo = i === 0 ? 0 : breaks[i - 1];
         const hi = i < breaks.length ? breaks[i] : null;
-        const label = hi != null ? `${lo.toFixed(1)}–${hi.toFixed(1)}` : `>${lo.toFixed(1)}`;
+        const label = hi != null ? `${fmt(lo)}–${fmt(hi)}` : `>${fmt(lo)}`;
         return `<span class="legend-swatch" style="background:${c}" title="${label}"></span>`;
       });
-      const metricLabel = field === "yvr" ? "Youth victim rate per 100k/yr" : "Youth offense rate per 100k/yr";
+      const people = field === "yvr" ? "victims" : "perpetrators";
+      const metricLabel = isCount ? `Youth ${people}` : `Youth ${people} per 100k/yr`;
+      const period = isCount ? "total" : "annual avg";
+      for (const option of $("ctl-cmap-metric").options) {
+        const word = option.value === "yvr" ? "victim" : "offense";
+        option.textContent = isCount ? `Youth (12–17) ${word}s` : `Youth (12–17) ${word} rate`;
+      }
       legendEl.innerHTML = `
         <span class="legend-label">Low</span>
         ${swatches.join("")}
         <span class="legend-label">High</span>
-        <span class="legend-metric">${metricLabel} (annual avg, Jan 2017 – Feb 2026)</span>`;
+        <span class="legend-metric">${metricLabel} (${period}, Jan 2017 – Feb 2026)</span>`;
     }
 
     function cmapShowTip(event, geoid, f) {
-      const s = cmapSummary[geoid];
       const n = cmapNames[geoid];
       const field = getMetric();
-      const val = s ? (s[field] * 12).toFixed(1) : null;
+      const val = countyValue(geoid);
       const name = (n ? `${fmtCounty(n.county, geoid)}, ${n.state}` : f.properties.name) || geoid;
-      const metricLabel = field === "yvr" ? "victim rate" : "offense rate";
-      cmapTip.innerHTML = val != null && +val > 0
-        ? `<strong>${name}</strong>${val} per 100k/yr (${metricLabel})`
+      const noun = field === "yvr" ? "victim" : "offense";
+      const text = radio("metric-type") === "count"
+        ? `${Math.round(val).toLocaleString("en-US")} youth ${noun}${val === 1 ? "" : "s"}`
+        : `${Number(val).toFixed(1)} per 100k/yr (${noun} rate)`;
+      cmapTip.innerHTML = val > 0
+        ? `<strong>${name}</strong>${text}`
         : `<strong>${name}</strong>No incidents recorded`;
       const [mx, my] = d3.pointer(event, cmapFrame);
       const flip = mx > cmapFrame.clientWidth * 0.6;
@@ -1348,6 +1366,7 @@
     $("ctl-cmap-metric").addEventListener("change", () => { renderCountyMap(); pushState(); });
 
     renderCountyMap();
+    redrawCountyMap = renderCountyMap;
     countyMapBuilt = true;
   }
 
@@ -1365,7 +1384,8 @@
     renderGeo();
     renderTrend();
     renderHighlights();
-    if (currentCountyGeoid && countyData) renderCountySpotlight(currentCountyGeoid);
+    if (redrawCountyMap) redrawCountyMap();
+    if (!$("panel-county").hidden && currentCountyGeoid && countyData) renderCountySpotlight(currentCountyGeoid);
     pushState();
   });
   ctl.state.addEventListener("change", onStateChange);
