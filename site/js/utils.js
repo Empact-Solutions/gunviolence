@@ -8,9 +8,11 @@ const WINDOW = 12;
 // Victims/Perpetrators is the recurring pair across every chart on this site;
 // `neutral` is the third slot, used only where a third category is needed
 // (e.g. "no child or youth involved").
+// The blue and orange are the line colors of the Casey Foundation's own trend
+// charts ("Changing Course in Youth Detention", 2023).
 const PALETTE = {
-  victim: "#2a78d6", // blue — categorical slot 1
-  perp: "#eb6834", // orange — categorical slot 2
+  victim: "#005292", // Casey blue — categorical slot 1
+  perp: "#da5420", // Casey burnt orange — categorical slot 2
   neutral: "#1baf7a", // aqua — categorical slot 3
 };
 

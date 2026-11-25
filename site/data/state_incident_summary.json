@@ -1,0 +1,257 @@
+{
+  "Alabama": {
+    "pct_no_u18": 0.86348720192518,
+    "pct_victim": 0.112666812513673,
+    "pct_perp_excl_possession": 0.0694596368409538
+  },
+  "Alaska": {
+    "pct_no_u18": 0.848484848484849,
+    "pct_victim": 0.0802139037433155,
+    "pct_perp_excl_possession": 0.0641711229946524
+  },
+  "Arizona": {
+    "pct_no_u18": 0.859450105748894,
+    "pct_victim": 0.110363391655451,
+    "pct_perp_excl_possession": 0.067487021726591
+  },
+  "Arkansas": {
+    "pct_no_u18": 0.837631578947368,
+    "pct_victim": 0.129210526315789,
+    "pct_perp_excl_possession": 0.0918421052631579
+  },
+  "California": {
+    "pct_no_u18": 0.892452393801557,
+    "pct_victim": 0.0889676971706114,
+    "pct_perp_excl_possession": 0.0454089892837869
+  },
+  "Colorado": {
+    "pct_no_u18": 0.857993197278912,
+    "pct_victim": 0.118622448979592,
+    "pct_perp_excl_possession": 0.0782312925170068
+  },
+  "Connecticut": {
+    "pct_no_u18": 0.892063492063492,
+    "pct_victim": 0.0812698412698413,
+    "pct_perp_excl_possession": 0.0431746031746032
+  },
+  "Delaware": {
+    "pct_no_u18": 0.794152744630072,
+    "pct_victim": 0.152147971360382,
+    "pct_perp_excl_possession": 0.0787589498806683
+  },
+  "District of Columbia": {
+    "pct_no_u18": 0.866842854238666,
+    "pct_victim": 0.124212238259809,
+    "pct_perp_excl_possession": 0.0536694450091482
+  },
+  "Florida": {
+    "pct_no_u18": 0.84842690770033,
+    "pct_victim": 0.115186279622226,
+    "pct_perp_excl_possession": 0.0673271916101744
+  },
+  "Georgia": {
+    "pct_no_u18": 0.840842135517712,
+    "pct_victim": 0.121146798879069,
+    "pct_perp_excl_possession": 0.0855787885320112
+  },
+  "Hawaii": {
+    "pct_no_u18": 0.907738095238095,
+    "pct_victim": 0.068452380952381,
+    "pct_perp_excl_possession": 0.0327380952380952
+  },
+  "Idaho": {
+    "pct_no_u18": 0.875,
+    "pct_victim": 0.0785714285714286,
+    "pct_perp_excl_possession": 0.0642857142857143
+  },
+  "Illinois": {
+    "pct_no_u18": 0.858331668996738,
+    "pct_victim": 0.134045669396179,
+    "pct_perp_excl_possession": 0.0302909260368817
+  },
+  "Indiana": {
+    "pct_no_u18": 0.8547171932981,
+    "pct_victim": 0.115821432587428,
+    "pct_perp_excl_possession": 0.0644326998763072
+  },
+  "Iowa": {
+    "pct_no_u18": 0.805464480874317,
+    "pct_victim": 0.130054644808743,
+    "pct_perp_excl_possession": 0.108196721311475
+  },
+  "Kansas": {
+    "pct_no_u18": 0.837675350701403,
+    "pct_victim": 0.125050100200401,
+    "pct_perp_excl_possession": 0.0845691382765531
+  },
+  "Kentucky": {
+    "pct_no_u18": 0.843602666233133,
+    "pct_victim": 0.122744269224516,
+    "pct_perp_excl_possession": 0.0596650951064868
+  },
+  "Louisiana": {
+    "pct_no_u18": 0.843238326258338,
+    "pct_victim": 0.133565797453002,
+    "pct_perp_excl_possession": 0.0801243177683445
+  },
+  "Maine": {
+    "pct_no_u18": 0.885245901639344,
+    "pct_victim": 0.0772833723653396,
+    "pct_perp_excl_possession": 0.0515222482435597
+  },
+  "Maryland": {
+    "pct_no_u18": 0.878729732322748,
+    "pct_victim": 0.0989158591576322,
+    "pct_perp_excl_possession": 0.0409670920080591
+  },
+  "Massachusetts": {
+    "pct_no_u18": 0.87063051290428,
+    "pct_victim": 0.0833061091146684,
+    "pct_perp_excl_possession": 0.0614178373080693
+  },
+  "Michigan": {
+    "pct_no_u18": 0.890659747961453,
+    "pct_victim": 0.0949777613046701,
+    "pct_perp_excl_possession": 0.0398443291326909
+  },
+  "Minnesota": {
+    "pct_no_u18": 0.862573099415205,
+    "pct_victim": 0.112573099415205,
+    "pct_perp_excl_possession": 0.0560428849902534
+  },
+  "Mississippi": {
+    "pct_no_u18": 0.831695721077655,
+    "pct_victim": 0.13122028526149,
+    "pct_perp_excl_possession": 0.113629160063391
+  },
+  "Missouri": {
+    "pct_no_u18": 0.855186509964231,
+    "pct_victim": 0.124067450178845,
+    "pct_perp_excl_possession": 0.0514052120592744
+  },
+  "Montana": {
+    "pct_no_u18": 0.845188284518828,
+    "pct_victim": 0.108786610878661,
+    "pct_perp_excl_possession": 0.0794979079497908
+  },
+  "Nebraska": {
+    "pct_no_u18": 0.811946902654867,
+    "pct_victim": 0.126843657817109,
+    "pct_perp_excl_possession": 0.11283185840708
+  },
+  "Nevada": {
+    "pct_no_u18": 0.868514851485149,
+    "pct_victim": 0.0914851485148515,
+    "pct_perp_excl_possession": 0.0720792079207921
+  },
+  "New Hampshire": {
+    "pct_no_u18": 0.893491124260355,
+    "pct_victim": 0.0562130177514793,
+    "pct_perp_excl_possession": 0.0473372781065089
+  },
+  "New Jersey": {
+    "pct_no_u18": 0.888579903596589,
+    "pct_victim": 0.0967741935483871,
+    "pct_perp_excl_possession": 0.043010752688172
+  },
+  "New Mexico": {
+    "pct_no_u18": 0.846888125238641,
+    "pct_victim": 0.105383734249714,
+    "pct_perp_excl_possession": 0.1061473844979
+  },
+  "New York": {
+    "pct_no_u18": 0.883547008547009,
+    "pct_victim": 0.1,
+    "pct_perp_excl_possession": 0.042948717948718
+  },
+  "North Carolina": {
+    "pct_no_u18": 0.843495201674002,
+    "pct_victim": 0.116602929504293,
+    "pct_perp_excl_possession": 0.079370805974457
+  },
+  "North Dakota": {
+    "pct_no_u18": 0.85171102661597,
+    "pct_victim": 0.0988593155893536,
+    "pct_perp_excl_possession": 0.0570342205323194
+  },
+  "Ohio": {
+    "pct_no_u18": 0.841203787467583,
+    "pct_victim": 0.136963994933961,
+    "pct_perp_excl_possession": 0.0550027139497015
+  },
+  "Oklahoma": {
+    "pct_no_u18": 0.847878495660559,
+    "pct_victim": 0.104146576663452,
+    "pct_perp_excl_possession": 0.0834136933461909
+  },
+  "Oregon": {
+    "pct_no_u18": 0.893260778568439,
+    "pct_victim": 0.0858099623273336,
+    "pct_perp_excl_possession": 0.0493930514859774
+  },
+  "Pennsylvania": {
+    "pct_no_u18": 0.877889182058047,
+    "pct_victim": 0.117467018469657,
+    "pct_perp_excl_possession": 0.0357255936675462
+  },
+  "Rhode Island": {
+    "pct_no_u18": 0.892787524366472,
+    "pct_victim": 0.0760233918128655,
+    "pct_perp_excl_possession": 0.0467836257309941
+  },
+  "South Carolina": {
+    "pct_no_u18": 0.844602337840935,
+    "pct_victim": 0.116777446710979,
+    "pct_perp_excl_possession": 0.0856062342424937
+  },
+  "South Dakota": {
+    "pct_no_u18": 0.798780487804878,
+    "pct_victim": 0.121951219512195,
+    "pct_perp_excl_possession": 0.121951219512195
+  },
+  "Tennessee": {
+    "pct_no_u18": 0.855580228637223,
+    "pct_victim": 0.10897277736656,
+    "pct_perp_excl_possession": 0.0692491158812402
+  },
+  "Texas": {
+    "pct_no_u18": 0.847602541883304,
+    "pct_victim": 0.119044868091662,
+    "pct_perp_excl_possession": 0.0816868861929521
+  },
+  "Utah": {
+    "pct_no_u18": 0.749107142857143,
+    "pct_victim": 0.163392857142857,
+    "pct_perp_excl_possession": 0.174107142857143
+  },
+  "Vermont": {
+    "pct_no_u18": 0.936974789915966,
+    "pct_victim": 0.0252100840336134,
+    "pct_perp_excl_possession": 0.0252100840336134
+  },
+  "Virginia": {
+    "pct_no_u18": 0.852770284291347,
+    "pct_victim": 0.11983814069309,
+    "pct_perp_excl_possession": 0.0563394895206474
+  },
+  "Washington": {
+    "pct_no_u18": 0.852836879432624,
+    "pct_victim": 0.111037234042553,
+    "pct_perp_excl_possession": 0.0815602836879433
+  },
+  "West Virginia": {
+    "pct_no_u18": 0.918767507002801,
+    "pct_victim": 0.0497198879551821,
+    "pct_perp_excl_possession": 0.038515406162465
+  },
+  "Wisconsin": {
+    "pct_no_u18": 0.850098360655738,
+    "pct_victim": 0.133770491803279,
+    "pct_perp_excl_possession": 0.0432786885245902
+  },
+  "Wyoming": {
+    "pct_no_u18": 0.845,
+    "pct_victim": 0.085,
+    "pct_perp_excl_possession": 0.075
+  }
+}
