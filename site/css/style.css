@@ -9,8 +9,8 @@
   --max: 760px;
   /* Categorical palette shared with the charts (see js/utils.js PALETTE) —
      kept in sync manually since chart colors are JS and these are CSS. */
-  --series-victim: #2a78d6;
-  --series-perp: #eb6834;
+  --series-victim: #005292;
+  --series-perp: #da5420;
 }
 
 * { box-sizing: border-box; }
